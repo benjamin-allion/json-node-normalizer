@@ -39,6 +39,4 @@ const jsonToConvertSample = {
     },
 };
 
-module.exports = {
-    jsonToConvertSample
-}
+module.exports = jsonToConvertSample

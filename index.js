@@ -1,5 +1,5 @@
-const { convertJson } = require('./lib/convertJson');
+const { convert } = require('./lib/convert');
 
 module.exports = {
-    convertJson
+    convert: convert
 }
