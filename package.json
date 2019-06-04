@@ -11,13 +11,7 @@
     "array"
   ],
   "author": "ALLION Benjamin, BENBRAHIM Rayed",
-  "license": "Apache-2.0",
-  "licenses": [
-    {
-      "type": "Apache-2.0",
-      "url": "http://www.apache.org/licenses/LICENSE-2.0"
-    }
-  ],
+  "license": "MIT",
   "dependencies": {
     "eslint": "^4.19.1",
     "eslint-config-airbnb-base": "^13.1.0",
