@@ -13,6 +13,7 @@ module.exports = {
         "ecmaVersion": 2018
     },
     "rules": {
-        "no-underscore-dangle": 'off'
+        "no-underscore-dangle": 'off',
+        "no-use-before-define": 'off'
     }
 };
