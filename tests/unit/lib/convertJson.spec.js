@@ -25,3 +25,14 @@ describe('convert.js', () => {
         expect(result.root.subArray[0].mArrayProperty).toMatchObject({value: 'TEST'});
     });
 });
+
+describe('convert.js', () => {
+    it('try to convert an unknown field \'root.unknown\'', () => {
+        // Given
+        const jsonToConvert = { ...jsonSample };
+        // When
+        const result = SingleToArray.convert(jsonToConvert, 'root.unknown');
+        // Then
+        expect(result.root.unknown).not.toBeDefined();
+    });
+});
