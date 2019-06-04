@@ -17,5 +17,8 @@
       "type": "Apache-2.0",
       "url": "http://www.apache.org/licenses/LICENSE-2.0"
     }
-  ]
+  ],
+  "dependencies": {
+    "winston": "^3.2.1"
+  }
 }
