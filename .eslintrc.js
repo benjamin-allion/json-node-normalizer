@@ -14,6 +14,7 @@ module.exports = {
     },
     "rules": {
         "no-underscore-dangle": 'off',
+        "comma-dangle": 'off',
         "no-use-before-define": 'off'
     }
 };
