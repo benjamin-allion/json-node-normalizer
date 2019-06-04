@@ -1,4 +1,4 @@
-const { NodeTypeConverter } = require('../../../../index');
+const NodeTypeConverter = require('../../../../index');
 const jsonSample = require('./mockData');
 
 describe('converter.js', () => {
