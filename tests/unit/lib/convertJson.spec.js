@@ -51,3 +51,20 @@ describe('convert.js', () => {
         expect(result.root.subArray[0].mArrayProperty[0].value).toBe('TEST');
     });
 });
+
+describe('convert.js', () => {
+    it('property of array of array entries conversion (multiple sub-levels) \'root.subArray.*.mArrayProperty.*.values\'', () => {
+        // Given
+        const jsonToConvert = { ...jsonSample };
+        // When
+        let result = SingleToArray.convert(jsonToConvert, 'root.subArray');
+        result = SingleToArray.convert(result, 'root.subArray.*.mArrayProperty');
+        result = SingleToArray.convert(result, 'root.subArray.*.mArrayProperty.*.values');
+        // Then
+        expect(Array.isArray(result.root.subArray[0].mArrayProperty)).toBe(true);
+        expect(Array.isArray(result.root.subArray[1].mArrayProperty)).toBe(true);
+        expect(Array.isArray(result.root.subArray[2].mArrayProperty)).toBe(true);
+        expect(Array.isArray(result.root.subArray[0].mArrayProperty[0].values)).toBe(false); // Doesn't contain 'values'
+        expect(Array.isArray(result.root.subArray[1].mArrayProperty[0].values)).toBe(true);
+    });
+});
