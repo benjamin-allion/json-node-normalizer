@@ -4,7 +4,7 @@
   "description": "Module that convert specified fields to array",
   "main": "index.js",
   "scripts": {
-    "test": "jest"
+    "test": "jest --coverage"
   },
   "keywords": [
     "json",

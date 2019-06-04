@@ -15,6 +15,19 @@ describe('convert.js', () => {
 });
 
 describe('convert.js', () => {
+    it('multiple fields conversion \'root.subField\'', () => {
+        // Given
+        const jsonToConvert = { ...jsonSample };
+        console.log(jsonToConvert);
+        // When
+        const result = SingleToArray.convert(jsonToConvert, ['root.subField','root.subArray' ]);
+        // Then
+        expect(Array.isArray(result.root.subField)).toBe(true);
+        expect(result.root.subField[0].mArrayProperty).toMatchObject({ value: 'TEST' });
+    });
+});
+
+describe('convert.js', () => {
     it('try to convert field that is already an array \'root.subArray\'', () => {
         // Given
         const jsonToConvert = { ...jsonSample };
