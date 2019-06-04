@@ -4,7 +4,7 @@
   "description": "Module that convert specified fields to array",
   "main": "index.js",
   "scripts": {
-    "test": "jest --coverage",
+    "test": "cross-env ENV_PATH=.env.testing jest --coverage",
     "lint": "eslint \"./lib/**/*.js\" \"./config/**/*.js\" \"./test/**/*.js\"",
     "lint:fix": "eslint --fix \"./lib/**/*.js\" \"./config/**/*.js\" \"./test/**/*.js\""
   },
@@ -16,16 +16,17 @@
   "license": "MIT",
   "dependencies": {
     "eslint": "^4.19.1",
+    "eslint-config-airbnb-base": "^13.1.0",
     "eslint-config-prettier": "^4.1.0",
     "eslint-config-standard": "^12.0.0",
     "eslint-plugin-import": "^2.14.0",
     "eslint-plugin-node": "^7.0.1",
     "eslint-plugin-prettier": "^3.0.1",
     "eslint-plugin-promise": "^4.0.1",
-    "eslint-config-airbnb-base": "^13.1.0",
     "winston": "^3.2.1"
   },
   "devDependencies": {
+    "cross-env": "^5.2.0",
     "jest": "^24.8.0"
   }
 }
