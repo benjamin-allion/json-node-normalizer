@@ -1,3 +1,3 @@
-const { JsonPropertyConverter, ConversionTypes } = require('./lib');
+const { NodeTypeConverter, ConversionTypes } = require('./lib');
 
-module.exports = { JsonPropertyConverter, ConversionTypes };
+module.exports = { NodeTypeConverter, ConversionTypes };

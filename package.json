@@ -1,7 +1,13 @@
 {
-  "name": "json-single-to-array",
+  "name": "node-type-transform",
   "version": "1.0.0",
-  "description": "Module that convert specified fields to array",
+  "description": "Node module that transforming specified json object fields to another type.",
+  "contributors": [
+    {
+      "name": "json-type-converter contributors",
+      "url": "https://github.com/benjamin-allion/json-type-converter/graphs/contributors"
+    }
+  ],
   "main": "index.js",
   "scripts": {
     "test": "cross-env ENV_PATH=.env.testing jest --coverage",
@@ -10,7 +16,10 @@
   },
   "keywords": [
     "json",
-    "array"
+    "transform",
+    "node",
+    "type",
+    "converter"
   ],
   "author": "ALLION Benjamin, BENBRAHIM Rayed",
   "license": "MIT",

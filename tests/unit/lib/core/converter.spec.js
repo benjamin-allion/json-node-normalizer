@@ -1,4 +1,4 @@
-const { JsonPropertyConverter} = require('../../../../index');
+const { NodeTypeConverter } = require('../../../../index');
 const jsonSample = require('./mockData');
 
 describe('converter.js', () => {
@@ -7,7 +7,7 @@ describe('converter.js', () => {
     const jsonToConvert = { ...jsonSample };
     const targetType = 'UNKNOW_TYPE';
     // When
-    const result = JsonPropertyConverter.convert(jsonToConvert, 'root.subField', targetType);
+    const result = NodeTypeConverter.convert(jsonToConvert, 'root.subField', targetType);
     // Then
     expect(jsonToConvert).toEqual(jsonSample);
   });

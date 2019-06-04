@@ -1,4 +1,4 @@
-const { JsonPropertyConverter, ConversionTypes} = require('../../../../index');
+const { NodeTypeConverter, ConversionTypes } = require('../../../../index');
 const jsonSample = require('./mockData');
 
 describe('converter.js', () => {
@@ -7,7 +7,7 @@ describe('converter.js', () => {
     const jsonToConvert = { ...jsonSample };
     const targetType = ConversionTypes.ARRAY_TYPE;
     // When
-    const result = JsonPropertyConverter.convert(jsonToConvert, 'root.subField', targetType);
+    const result = NodeTypeConverter.convert(jsonToConvert, 'root.subField', targetType);
     // Then
     expect(Array.isArray(result.root.subField)).toBe(true);
     expect(result.root.subField[0].mArrayProperty).toMatchObject({ value: 'TEST' });
@@ -20,7 +20,7 @@ describe('converter.js', () => {
     const jsonToConvert = { ...jsonSample };
     const targetType = ConversionTypes.ARRAY_TYPE;
     // When
-    const result = JsonPropertyConverter.convert(
+    const result = NodeTypeConverter.convert(
       jsonToConvert, ['root.subField', 'root.subArray'], targetType
     );
     // Then
@@ -35,7 +35,7 @@ describe('converter.js', () => {
     const jsonToConvert = { ...jsonSample };
     const targetType = ConversionTypes.ARRAY_TYPE;
     // When
-    const result = JsonPropertyConverter.convert(jsonToConvert, 'root.subArray', targetType);
+    const result = NodeTypeConverter.convert(jsonToConvert, 'root.subArray', targetType);
     // Then
     expect(Array.isArray(result.root.subArray)).toBe(true);
     expect(result.root.subArray[0].mArrayProperty).toMatchObject({ value: 'TEST' });
@@ -48,7 +48,7 @@ describe('converter.js', () => {
     const jsonToConvert = { ...jsonSample };
     const targetType = ConversionTypes.ARRAY_TYPE;
     // When
-    const result = JsonPropertyConverter.convert(jsonToConvert, 'root.unknown', targetType);
+    const result = NodeTypeConverter.convert(jsonToConvert, 'root.unknown', targetType);
     // Then
     expect(result.root.unknown).not.toBeDefined();
   });
@@ -60,8 +60,8 @@ describe('converter.js', () => {
     const jsonToConvert = { ...jsonSample };
     const targetType = ConversionTypes.ARRAY_TYPE;
     // When
-    let result = JsonPropertyConverter.convert(jsonToConvert, 'root.subArray', targetType);
-    result = JsonPropertyConverter.convert(result, 'root.subArray.*.mArrayProperty', targetType);
+    let result = NodeTypeConverter.convert(jsonToConvert, 'root.subArray', targetType);
+    result = NodeTypeConverter.convert(result, 'root.subArray.*.mArrayProperty', targetType);
     // Then
     expect(Array.isArray(result.root.subArray)).toBe(true);
     expect(result.root.subArray[0].mProperty).toBe('TEST');
@@ -76,9 +76,9 @@ describe('converter.js', () => {
     const jsonToConvert = { ...jsonSample };
     const targetType = ConversionTypes.ARRAY_TYPE;
     // When
-    let result = JsonPropertyConverter.convert(jsonToConvert, 'root.subArray', targetType);
-    result = JsonPropertyConverter.convert(result, 'root.subArray.*.mArrayProperty', targetType);
-    result = JsonPropertyConverter.convert(
+    let result = NodeTypeConverter.convert(jsonToConvert, 'root.subArray', targetType);
+    result = NodeTypeConverter.convert(result, 'root.subArray.*.mArrayProperty', targetType);
+    result = NodeTypeConverter.convert(
       result, 'root.subArray.*.mArrayProperty.*.values', targetType
     );
     // Then
