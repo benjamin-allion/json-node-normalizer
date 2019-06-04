@@ -13,6 +13,8 @@
   "author": "ALLION Benjamin, BENBRAHIM Rayed",
   "license": "MIT",
   "dependencies": {
+    "eslint": "^4.19.1",
+    "eslint-config-airbnb-base": "^13.1.0",
     "winston": "^3.2.1"
   }
 }
