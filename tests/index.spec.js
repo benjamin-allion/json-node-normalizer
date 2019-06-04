@@ -1,5 +1,5 @@
 describe('start.js', () => {
-    it('launching the app', async () => {
-      console.log("start tests")
-    });
+  it('launching the app', async () => {
+    console.log('start tests');
   });
+});
