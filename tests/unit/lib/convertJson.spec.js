@@ -36,3 +36,18 @@ describe('convert.js', () => {
         expect(result.root.unknown).not.toBeDefined();
     });
 });
+
+describe('convert.js', () => {
+    it('property of array entries conversion \'root.subArray.*.mArrayProperty\'', () => {
+        // Given
+        const jsonToConvert = { ...jsonSample };
+        // When
+        let result = SingleToArray.convert(jsonToConvert, 'root.subArray');
+        result = SingleToArray.convert(result, 'root.subArray.*.mArrayProperty');
+        // Then
+        expect(Array.isArray(result.root.subArray)).toBe(true);
+        expect(result.root.subArray[0].mProperty).toBe('TEST');
+        expect(Array.isArray(result.root.subArray[0].mArrayProperty)).toBe(true);
+        expect(result.root.subArray[0].mArrayProperty[0].value).toBe('TEST');
+    });
+});
