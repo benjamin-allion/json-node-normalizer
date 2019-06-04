@@ -1,3 +1,5 @@
-const { singleToArray } = require('./lib/singleToArray');
+const { convertJson } = require('./lib/convertJson');
 
-exports.singleToArray = singleToArray
+module.exports = {
+    convertJson
+}
