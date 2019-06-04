@@ -1,60 +1,67 @@
-const SingleToArray = require('../../../index');
+const { JsonPropertyConverter, ConversionTypes} = require('../../../../index');
 const jsonSample = require('./mockData');
 
-describe('convert.js', () => {
+describe('converter.js', () => {
   it('simple field conversion \'root.subField\'', () => {
     // Given
     const jsonToConvert = { ...jsonSample };
+    const targetType = ConversionTypes.ARRAY_TYPE;
     // When
-    const result = SingleToArray.convert(jsonToConvert, 'root.subField');
+    const result = JsonPropertyConverter.convert(jsonToConvert, 'root.subField', targetType);
     // Then
     expect(Array.isArray(result.root.subField)).toBe(true);
     expect(result.root.subField[0].mArrayProperty).toMatchObject({ value: 'TEST' });
   });
 });
 
-describe('convert.js', () => {
+describe('converter.js', () => {
   it('multiple fields conversion \'root.subField\'', () => {
     // Given
     const jsonToConvert = { ...jsonSample };
+    const targetType = ConversionTypes.ARRAY_TYPE;
     // When
-    const result = SingleToArray.convert(jsonToConvert, ['root.subField', 'root.subArray']);
+    const result = JsonPropertyConverter.convert(
+      jsonToConvert, ['root.subField', 'root.subArray'], targetType
+    );
     // Then
     expect(Array.isArray(result.root.subField)).toBe(true);
     expect(result.root.subField[0].mArrayProperty).toMatchObject({ value: 'TEST' });
   });
 });
 
-describe('convert.js', () => {
+describe('converter.js', () => {
   it('try to convert field that is already an array \'root.subArray\'', () => {
     // Given
     const jsonToConvert = { ...jsonSample };
+    const targetType = ConversionTypes.ARRAY_TYPE;
     // When
-    const result = SingleToArray.convert(jsonToConvert, 'root.subArray');
+    const result = JsonPropertyConverter.convert(jsonToConvert, 'root.subArray', targetType);
     // Then
     expect(Array.isArray(result.root.subArray)).toBe(true);
     expect(result.root.subArray[0].mArrayProperty).toMatchObject({ value: 'TEST' });
   });
 });
 
-describe('convert.js', () => {
+describe('converter.js', () => {
   it('try to convert an unknown field \'root.unknown\'', () => {
     // Given
     const jsonToConvert = { ...jsonSample };
+    const targetType = ConversionTypes.ARRAY_TYPE;
     // When
-    const result = SingleToArray.convert(jsonToConvert, 'root.unknown');
+    const result = JsonPropertyConverter.convert(jsonToConvert, 'root.unknown', targetType);
     // Then
     expect(result.root.unknown).not.toBeDefined();
   });
 });
 
-describe('convert.js', () => {
+describe('converter.js', () => {
   it('property of array entries conversion \'root.subArray.*.mArrayProperty\'', () => {
     // Given
     const jsonToConvert = { ...jsonSample };
+    const targetType = ConversionTypes.ARRAY_TYPE;
     // When
-    let result = SingleToArray.convert(jsonToConvert, 'root.subArray');
-    result = SingleToArray.convert(result, 'root.subArray.*.mArrayProperty');
+    let result = JsonPropertyConverter.convert(jsonToConvert, 'root.subArray', targetType);
+    result = JsonPropertyConverter.convert(result, 'root.subArray.*.mArrayProperty', targetType);
     // Then
     expect(Array.isArray(result.root.subArray)).toBe(true);
     expect(result.root.subArray[0].mProperty).toBe('TEST');
@@ -63,14 +70,17 @@ describe('convert.js', () => {
   });
 });
 
-describe('convert.js', () => {
+describe('converter.js', () => {
   it('property of array of array entries conversion (multiple sub-levels) \'root.subArray.*.mArrayProperty.*.values\'', () => {
     // Given
     const jsonToConvert = { ...jsonSample };
+    const targetType = ConversionTypes.ARRAY_TYPE;
     // When
-    let result = SingleToArray.convert(jsonToConvert, 'root.subArray');
-    result = SingleToArray.convert(result, 'root.subArray.*.mArrayProperty');
-    result = SingleToArray.convert(result, 'root.subArray.*.mArrayProperty.*.values');
+    let result = JsonPropertyConverter.convert(jsonToConvert, 'root.subArray', targetType);
+    result = JsonPropertyConverter.convert(result, 'root.subArray.*.mArrayProperty', targetType);
+    result = JsonPropertyConverter.convert(
+      result, 'root.subArray.*.mArrayProperty.*.values', targetType
+    );
     // Then
     expect(Array.isArray(result.root.subArray[0].mArrayProperty)).toBe(true);
     expect(Array.isArray(result.root.subArray[1].mArrayProperty)).toBe(true);
