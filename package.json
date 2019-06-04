@@ -1,0 +1,21 @@
+{
+  "name": "json-single-to-array",
+  "version": "1.0.0",
+  "description": "Module that convert specified fields to array",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "json",
+    "array"
+  ],
+  "author": "ALLION Benjamin, BENBRAHIM Rayed",
+  "license": "Apache-2.0",
+  "licenses": [
+    {
+      "type": "Apache-2.0",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0"
+    }
+  ]
+}
