@@ -1,8 +1,9 @@
-const { NodeTypeConverter, ConversionTypes } = require('../../../../index');
+const NodeTypeConverter = require('../../../../index');
+const { ConversionTypes } = require('../../../../index');
 const jsonSample = require('./mockData');
 
 describe('converter.js', () => {
-  it('simple field conversion \'root.subField\'', () => {
+  it('simple field conversion \'root.subField\' (by string path)', () => {
     // Given
     const jsonToConvert = { ...jsonSample };
     const targetType = ConversionTypes.ARRAY_TYPE;
@@ -13,6 +14,20 @@ describe('converter.js', () => {
     expect(result.root.subField[0].mArrayProperty).toMatchObject({ value: 'TEST' });
   });
 });
+
+describe('converter.js', () => {
+  it('simple field conversion \'root.subField\' (by jsonPath)', () => {
+    // Given
+    const jsonToConvert = { ...jsonSample };
+    const targetType = ConversionTypes.ARRAY_TYPE;
+    // When
+    const result = NodeTypeConverter.convert(jsonToConvert, '$.root.subField', targetType);
+    // Then
+    expect(Array.isArray(result.root.subField)).toBe(true);
+    expect(result.root.subField[0].mArrayProperty).toMatchObject({ value: 'TEST' });
+  });
+});
+
 
 describe('converter.js', () => {
   it('multiple fields conversion \'root.subField\'', () => {

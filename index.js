@@ -1,3 +1,3 @@
-const { NodeTypeConverter, ConversionTypes } = require('./lib');
+const { convert, ConversionTypes } = require('./lib');
 
-module.exports = { NodeTypeConverter, ConversionTypes };
+module.exports = { convert, ConversionTypes };
