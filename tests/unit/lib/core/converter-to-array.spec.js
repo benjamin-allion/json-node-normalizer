@@ -1,6 +1,6 @@
 const NodeTypeConverter = require('../../../../index');
 const { ConversionTypes } = require('../../../../index');
-const jsonSample = require('./mockData');
+const jsonSample = require('../../mock-sample/json');
 
 describe('converter.js', () => {
   it('simple field conversion \'root.subField\' (by string path)', () => {

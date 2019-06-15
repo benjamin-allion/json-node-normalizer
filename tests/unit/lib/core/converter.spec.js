@@ -1,5 +1,5 @@
 const NodeTypeConverter = require('../../../../index');
-const jsonSample = require('./mockData');
+const jsonSample = require('../../mock-sample/json');
 
 describe('converter.js', () => {
   it('try to convert field to undefined type', () => {
