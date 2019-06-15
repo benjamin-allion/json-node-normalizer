@@ -8,13 +8,13 @@ module.exports = {
       lines: 98,
       statements: 98,
     },
-    './src/**/*.js': {
+    './lib/**/*.js': {
       branches: 98,
       functions: 98,
       lines: 98,
       statements: 98,
     },
-    './src/*.js': {
+    './lib/*.js': {
       branches: 98,
       functions: 98,
       lines: 98,
