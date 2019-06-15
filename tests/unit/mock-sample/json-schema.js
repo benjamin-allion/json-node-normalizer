@@ -14,6 +14,9 @@ const schemaWithRef = {
     vegetables: {
       type: 'array',
       items: { $ref: '#/definitions/veggie' }
+    },
+    other: {
+      type: 'object'
     }
   },
   definitions: {
@@ -35,5 +38,5 @@ const schemaWithRef = {
 };
 
 module.exports = {
-  schemaWithRef,
+  schemaWithRef
 };
