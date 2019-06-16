@@ -14,7 +14,7 @@
     "lint": "eslint \"./lib/**/*.js\" \"./config/**/*.js\" \"./test/**/*.js\"",
     "lint:fix": "eslint --fix \"./lib/**/*.js\" \"./config/**/*.js\" \"./test/**/*.js\"",
     "coverage": "cross-env ENV_PATH=.env.testing jest --coverage",
-    "coverage:codacy": "yarn coverage && cat ./.coverage/lcov.info | codacy-coverage"
+    "coverage:codacy": "yarn coverage && cat ./coverage/lcov.info | codacy-coverage"
   },
   "keywords": [
     "json",
