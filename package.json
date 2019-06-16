@@ -12,7 +12,8 @@
   "scripts": {
     "test": "cross-env ENV_PATH=.env.testing jest --coverage --collectCoverage=true",
     "lint": "eslint \"./lib/**/*.js\" \"./config/**/*.js\" \"./test/**/*.js\"",
-    "lint:fix": "eslint --fix \"./lib/**/*.js\" \"./config/**/*.js\" \"./test/**/*.js\""
+    "lint:fix": "eslint --fix \"./lib/**/*.js\" \"./config/**/*.js\" \"./test/**/*.js\"",
+    "coverage:codacy": "yarn coverage && cat ./.coverage/lcov.info | codacy-coverage"
   },
   "keywords": [
     "json",
@@ -24,6 +25,7 @@
   "author": "ALLION Benjamin, BENBRAHIM Rayed",
   "license": "MIT",
   "dependencies": {
+    "codacy-coverage": "^3.4.0",
     "json-schema-deref": "^0.5.0",
     "jsonpath": "^1.0.2",
     "winston": "^3.2.1"
