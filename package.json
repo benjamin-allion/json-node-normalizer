@@ -24,12 +24,12 @@
   "author": "ALLION Benjamin, BENBRAHIM Rayed",
   "license": "MIT",
   "dependencies": {
-    "winston": "^3.2.1",
-    "jsonpath": "^1.0.2"
+    "json-schema-deref": "^0.5.0",
+    "jsonpath": "^1.0.2",
+    "winston": "^3.2.1"
   },
   "devDependencies": {
     "cross-env": "^5.2.0",
-    "jest": "^24.8.0",
     "eslint": "^4.19.1",
     "eslint-config-airbnb-base": "^13.1.0",
     "eslint-config-prettier": "^4.1.0",
@@ -37,6 +37,7 @@
     "eslint-plugin-import": "^2.14.0",
     "eslint-plugin-node": "^7.0.1",
     "eslint-plugin-prettier": "^3.0.1",
-    "eslint-plugin-promise": "^4.0.1"
+    "eslint-plugin-promise": "^4.0.1",
+    "jest": "^24.8.0"
   }
 }
