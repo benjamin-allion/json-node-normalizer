@@ -22,6 +22,7 @@ describe('converter.js', () => {
         name: 'my_name',
         firstName: 'firstName',
         age: '31',
+        phone: '33600000010',
         orders: {
           label: 'first_order'
         },
@@ -44,6 +45,9 @@ describe('converter.js', () => {
           age: {
             type: 'number'
           },
+          phone: {
+            type: 'integer'
+          },
           orders: {
             type: 'array',
             items: {
@@ -62,6 +66,66 @@ describe('converter.js', () => {
     const result = await NodeTypeConverter.convert(jsonToNormalize, jsonSchema);
     expect(Array.isArray(result.fields.orders)).toBe(true);
     expect(Number.isInteger(result.fields.age)).toBe(true);
+    expect(Number.isInteger(result.fields.phone)).toBe(true);
+    expect(typeof result.fields.id === 'string').toBe(true);
+    expect(typeof result.fields.active === 'boolean').toBe(true);
+  });
+});
+
+describe('converter.js', () => {
+  it(`try to normalize json data that should not be normalized from json schema`, async () => {
+    // Given
+    const jsonToNormalize = {
+      fields: {
+        id: '123',
+        name: 'my_name',
+        firstName: 'firstName',
+        age: 31,
+        phone: 33600000010,
+        orders: {
+          label: 'first_order'
+        },
+        active: true,
+      }
+    };
+    const jsonSchema = {
+      fields: {
+        type: 'object',
+        properties: {
+          id: {
+            type: 'string'
+          },
+          name: {
+            type: 'string'
+          },
+          firstName: {
+            type: 'string'
+          },
+          age: {
+            type: 'number'
+          },
+          phone: {
+            type: 'integer'
+          },
+          orders: {
+            type: 'array',
+            items: {
+              label: {
+                type: 'string'
+              }
+            }
+          },
+          active: {
+            type: 'boolean'
+          },
+        }
+      }
+    };
+    // When
+    const result = await NodeTypeConverter.convert(jsonToNormalize, jsonSchema);
+    expect(Array.isArray(result.fields.orders)).toBe(true);
+    expect(Number.isInteger(result.fields.age)).toBe(true);
+    expect(Number.isInteger(result.fields.phone)).toBe(true);
     expect(typeof result.fields.id === 'string').toBe(true);
     expect(typeof result.fields.active === 'boolean').toBe(true);
   });
