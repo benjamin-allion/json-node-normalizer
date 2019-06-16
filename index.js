@@ -1,3 +1,3 @@
-const { convert, convertFromPath, ConversionTypes } = require('./lib');
+const { normalize, normalizePath, NodeTypes } = require('./lib');
 
-module.exports = { convert, convertFromPath, ConversionTypes };
+module.exports = { normalize, normalizePath, NodeTypes };
