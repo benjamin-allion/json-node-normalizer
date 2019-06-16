@@ -1,14 +1,14 @@
-const NodeTypeConverter = require('../../../../index');
-const { ConversionTypes } = require('../../../../index');
+const JsonNodeNormalizer = require('../../../../index');
+const { NodeTypes } = require('../../../../index');
 const jsonSample = require('../../mock-sample/json');
 
 describe('converter.js', () => {
   it('simple field conversion \'root.subField\' (by string path)', () => {
     // Given
     const jsonToConvert = { ...jsonSample };
-    const targetType = ConversionTypes.ARRAY_TYPE;
+    const targetType = NodeTypes.ARRAY_TYPE;
     // When
-    const result = NodeTypeConverter.convertFromPath(jsonToConvert, 'root.subField', targetType);
+    const result = JsonNodeNormalizer.normalizePath(jsonToConvert, 'root.subField', targetType);
     // Then
     expect(Array.isArray(result.root.subField)).toBe(true);
     expect(result.root.subField[0].mArrayProperty).toMatchObject({ value: 'TEST' });
@@ -19,9 +19,9 @@ describe('converter.js', () => {
   it('simple field conversion \'root.subField\' (by jsonPath)', () => {
     // Given
     const jsonToConvert = { ...jsonSample };
-    const targetType = ConversionTypes.ARRAY_TYPE;
+    const targetType = NodeTypes.ARRAY_TYPE;
     // When
-    const result = NodeTypeConverter.convertFromPath(jsonToConvert, '$.root.subField', targetType);
+    const result = JsonNodeNormalizer.normalizePath(jsonToConvert, '$.root.subField', targetType);
     // Then
     expect(Array.isArray(result.root.subField)).toBe(true);
     expect(result.root.subField[0].mArrayProperty).toMatchObject({ value: 'TEST' });
@@ -33,9 +33,9 @@ describe('converter.js', () => {
   it('multiple fields conversion \'root.subField\'', () => {
     // Given
     const jsonToConvert = { ...jsonSample };
-    const targetType = ConversionTypes.ARRAY_TYPE;
+    const targetType = NodeTypes.ARRAY_TYPE;
     // When
-    const result = NodeTypeConverter.convertFromPath(
+    const result = JsonNodeNormalizer.normalizePath(
       jsonToConvert, ['root.subField', 'root.subArray'], targetType
     );
     // Then
@@ -48,9 +48,9 @@ describe('converter.js', () => {
   it('try to convert field that is already an array \'root.subArray\'', () => {
     // Given
     const jsonToConvert = { ...jsonSample };
-    const targetType = ConversionTypes.ARRAY_TYPE;
+    const targetType = NodeTypes.ARRAY_TYPE;
     // When
-    const result = NodeTypeConverter.convertFromPath(jsonToConvert, 'root.subArray', targetType);
+    const result = JsonNodeNormalizer.normalizePath(jsonToConvert, 'root.subArray', targetType);
     // Then
     expect(Array.isArray(result.root.subArray)).toBe(true);
     expect(result.root.subArray[0].mArrayProperty).toMatchObject({ value: 'TEST' });
@@ -61,9 +61,9 @@ describe('converter.js', () => {
   it('try to convert an unknown field \'root.unknown\'', () => {
     // Given
     const jsonToConvert = { ...jsonSample };
-    const targetType = ConversionTypes.ARRAY_TYPE;
+    const targetType = NodeTypes.ARRAY_TYPE;
     // When
-    const result = NodeTypeConverter.convertFromPath(jsonToConvert, 'root.unknown', targetType);
+    const result = JsonNodeNormalizer.normalizePath(jsonToConvert, 'root.unknown', targetType);
     // Then
     expect(result.root.unknown).not.toBeDefined();
   });
@@ -73,10 +73,10 @@ describe('converter.js', () => {
   it('property of array entries conversion \'root.subArray.*.mArrayProperty\'', () => {
     // Given
     const jsonToConvert = { ...jsonSample };
-    const targetType = ConversionTypes.ARRAY_TYPE;
+    const targetType = NodeTypes.ARRAY_TYPE;
     // When
-    let result = NodeTypeConverter.convertFromPath(jsonToConvert, 'root.subArray', targetType);
-    result = NodeTypeConverter.convertFromPath(result, 'root.subArray.*.mArrayProperty', targetType);
+    let result = JsonNodeNormalizer.normalizePath(jsonToConvert, 'root.subArray', targetType);
+    result = JsonNodeNormalizer.normalizePath(result, 'root.subArray.*.mArrayProperty', targetType);
     // Then
     expect(Array.isArray(result.root.subArray)).toBe(true);
     expect(result.root.subArray[0].mProperty).toBe('TEST');
@@ -89,11 +89,11 @@ describe('converter.js', () => {
   it('property of array of array entries conversion (multiple sub-levels) \'root.subArray.*.mArrayProperty.*.values\'', () => {
     // Given
     const jsonToConvert = { ...jsonSample };
-    const targetType = ConversionTypes.ARRAY_TYPE;
+    const targetType = NodeTypes.ARRAY_TYPE;
     // When
-    let result = NodeTypeConverter.convertFromPath(jsonToConvert, 'root.subArray', targetType);
-    result = NodeTypeConverter.convertFromPath(result, 'root.subArray.*.mArrayProperty', targetType);
-    result = NodeTypeConverter.convertFromPath(
+    let result = JsonNodeNormalizer.normalizePath(jsonToConvert, 'root.subArray', targetType);
+    result = JsonNodeNormalizer.normalizePath(result, 'root.subArray.*.mArrayProperty', targetType);
+    result = JsonNodeNormalizer.normalizePath(
       result, 'root.subArray.*.mArrayProperty.*.values', targetType
     );
     // Then
