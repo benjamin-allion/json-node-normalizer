@@ -30,8 +30,9 @@ jobs:
 
       - run: yarn install
       - run: yarn test     # test
+      - run: yarn coverage:codacy # check coverage
       - run: yarn lint     # lint
-  
+
 workflows:
   version: 2
   build_and_test:

@@ -1,18 +1,20 @@
 {
-  "name": "node-type-transform",
+  "name": "json-node-normalizer",
   "version": "1.0.0",
-  "description": "Node module that transforming specified json object fields to another type.",
+  "description": "NodeJS module that normalize json data types from json schema specifications.",
   "contributors": [
     {
-      "name": "json-type-converter contributors",
+      "name": "json-node-normalizer contributors",
       "url": "https://github.com/benjamin-allion/json-type-converter/graphs/contributors"
     }
   ],
   "main": "index.js",
   "scripts": {
-    "test": "cross-env ENV_PATH=.env.testing jest --coverage",
+    "test": "cross-env ENV_PATH=.env.testing jest",
     "lint": "eslint \"./lib/**/*.js\" \"./config/**/*.js\" \"./test/**/*.js\"",
-    "lint:fix": "eslint --fix \"./lib/**/*.js\" \"./config/**/*.js\" \"./test/**/*.js\""
+    "lint:fix": "eslint --fix \"./lib/**/*.js\" \"./config/**/*.js\" \"./test/**/*.js\"",
+    "coverage": "cross-env ENV_PATH=.env.testing jest --coverage",
+    "coverage:codacy": "yarn coverage && cat ./coverage/lcov.info | codacy-coverage"
   },
   "keywords": [
     "json",
@@ -24,6 +26,7 @@
   "author": "ALLION Benjamin, BENBRAHIM Rayed",
   "license": "MIT",
   "dependencies": {
+    "codacy-coverage": "^3.4.0",
     "json-schema-deref": "^0.5.0",
     "jsonpath": "^1.0.2",
     "winston": "^3.2.1"
