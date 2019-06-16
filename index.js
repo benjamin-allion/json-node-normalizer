@@ -1,3 +1,3 @@
-const { convert, ConversionTypes } = require('./lib');
+const { convert, convertFromPath, ConversionTypes } = require('./lib');
 
-module.exports = { convert, ConversionTypes };
+module.exports = { convert, convertFromPath, ConversionTypes };

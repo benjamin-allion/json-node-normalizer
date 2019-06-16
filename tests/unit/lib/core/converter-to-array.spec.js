@@ -8,7 +8,7 @@ describe('converter.js', () => {
     const jsonToConvert = { ...jsonSample };
     const targetType = ConversionTypes.ARRAY_TYPE;
     // When
-    const result = NodeTypeConverter.convert(jsonToConvert, 'root.subField', targetType);
+    const result = NodeTypeConverter.convertFromPath(jsonToConvert, 'root.subField', targetType);
     // Then
     expect(Array.isArray(result.root.subField)).toBe(true);
     expect(result.root.subField[0].mArrayProperty).toMatchObject({ value: 'TEST' });
@@ -21,7 +21,7 @@ describe('converter.js', () => {
     const jsonToConvert = { ...jsonSample };
     const targetType = ConversionTypes.ARRAY_TYPE;
     // When
-    const result = NodeTypeConverter.convert(jsonToConvert, '$.root.subField', targetType);
+    const result = NodeTypeConverter.convertFromPath(jsonToConvert, '$.root.subField', targetType);
     // Then
     expect(Array.isArray(result.root.subField)).toBe(true);
     expect(result.root.subField[0].mArrayProperty).toMatchObject({ value: 'TEST' });
@@ -35,7 +35,7 @@ describe('converter.js', () => {
     const jsonToConvert = { ...jsonSample };
     const targetType = ConversionTypes.ARRAY_TYPE;
     // When
-    const result = NodeTypeConverter.convert(
+    const result = NodeTypeConverter.convertFromPath(
       jsonToConvert, ['root.subField', 'root.subArray'], targetType
     );
     // Then
@@ -50,7 +50,7 @@ describe('converter.js', () => {
     const jsonToConvert = { ...jsonSample };
     const targetType = ConversionTypes.ARRAY_TYPE;
     // When
-    const result = NodeTypeConverter.convert(jsonToConvert, 'root.subArray', targetType);
+    const result = NodeTypeConverter.convertFromPath(jsonToConvert, 'root.subArray', targetType);
     // Then
     expect(Array.isArray(result.root.subArray)).toBe(true);
     expect(result.root.subArray[0].mArrayProperty).toMatchObject({ value: 'TEST' });
@@ -63,7 +63,7 @@ describe('converter.js', () => {
     const jsonToConvert = { ...jsonSample };
     const targetType = ConversionTypes.ARRAY_TYPE;
     // When
-    const result = NodeTypeConverter.convert(jsonToConvert, 'root.unknown', targetType);
+    const result = NodeTypeConverter.convertFromPath(jsonToConvert, 'root.unknown', targetType);
     // Then
     expect(result.root.unknown).not.toBeDefined();
   });
@@ -75,8 +75,8 @@ describe('converter.js', () => {
     const jsonToConvert = { ...jsonSample };
     const targetType = ConversionTypes.ARRAY_TYPE;
     // When
-    let result = NodeTypeConverter.convert(jsonToConvert, 'root.subArray', targetType);
-    result = NodeTypeConverter.convert(result, 'root.subArray.*.mArrayProperty', targetType);
+    let result = NodeTypeConverter.convertFromPath(jsonToConvert, 'root.subArray', targetType);
+    result = NodeTypeConverter.convertFromPath(result, 'root.subArray.*.mArrayProperty', targetType);
     // Then
     expect(Array.isArray(result.root.subArray)).toBe(true);
     expect(result.root.subArray[0].mProperty).toBe('TEST');
@@ -91,9 +91,9 @@ describe('converter.js', () => {
     const jsonToConvert = { ...jsonSample };
     const targetType = ConversionTypes.ARRAY_TYPE;
     // When
-    let result = NodeTypeConverter.convert(jsonToConvert, 'root.subArray', targetType);
-    result = NodeTypeConverter.convert(result, 'root.subArray.*.mArrayProperty', targetType);
-    result = NodeTypeConverter.convert(
+    let result = NodeTypeConverter.convertFromPath(jsonToConvert, 'root.subArray', targetType);
+    result = NodeTypeConverter.convertFromPath(result, 'root.subArray.*.mArrayProperty', targetType);
+    result = NodeTypeConverter.convertFromPath(
       result, 'root.subArray.*.mArrayProperty.*.values', targetType
     );
     // Then
