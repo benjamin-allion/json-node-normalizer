@@ -1,16 +1,16 @@
 {
-  "name": "node-type-transform",
+  "name": "json-node-normalizer",
   "version": "1.0.0",
-  "description": "Node module that transforming specified json object fields to another type.",
+  "description": "NodeJS module that normalize json data types from json schema specifications.",
   "contributors": [
     {
-      "name": "json-type-converter contributors",
+      "name": "json-node-normalizer contributors",
       "url": "https://github.com/benjamin-allion/json-type-converter/graphs/contributors"
     }
   ],
   "main": "index.js",
   "scripts": {
-    "test": "cross-env ENV_PATH=.env.testing jest --coverage",
+    "test": "cross-env ENV_PATH=.env.testing jest --coverage --collectCoverage=true",
     "lint": "eslint \"./lib/**/*.js\" \"./config/**/*.js\" \"./test/**/*.js\"",
     "lint:fix": "eslint --fix \"./lib/**/*.js\" \"./config/**/*.js\" \"./test/**/*.js\""
   },
