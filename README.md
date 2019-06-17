@@ -136,6 +136,22 @@ normalizedJson = JsonNodeNormalizer.normalizePath(jsonData, '..active', NodeType
 
 See https://github.com/json-path/JsonPath for more information about JsonPath expressions.
 
+## Logging Level
+
+Log events can have different severity levels - in some cases, you just want to log events with at least a warning level, sometimes log lines have to be more verbose.
+
+Each level is given a specific integer priority. The higher the priority the more important the message is considered to be.
+
+| Level 	| Priority 	|
+|-------	|----------	|
+| debug 	| 4        	|
+| info (default) 	| 2        	|
+| error 	| 0        	|
+
+By default the logging level is set to 'info'.
+
+You can override the logging level by setting the `JSON_NODE_NORMALIZER_LOGGING_LEVEL` environment variable.
+
 ## License
 
 [MIT License](http://www.opensource.org/licenses/mit-license.php).
