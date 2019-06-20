@@ -105,7 +105,7 @@ Result :
 ```javascript
 result = {
    "fields":{
-      "id": 123,
+      "id": "123",
       "name": "my_name",
       "firstName": "firstName",
       "age": 31,
