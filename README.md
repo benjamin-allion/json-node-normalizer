@@ -110,9 +110,9 @@ result = {
       "firstName": "firstName",
       "age": 31,
       "phone": 33600000010,
-      "orders":{
+      "orders":[{
          "label": "first_order"
-      },
+      }],
       "active": true
    }
 }
