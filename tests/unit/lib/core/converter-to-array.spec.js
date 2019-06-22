@@ -28,7 +28,6 @@ describe('converter.js', () => {
   });
 });
 
-
 describe('converter.js', () => {
   it('multiple fields conversion \'root.subField\'', () => {
     // Given

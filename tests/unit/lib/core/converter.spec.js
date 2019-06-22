@@ -86,6 +86,9 @@ describe('converter.js', () => {
           label: 'first_order'
         },
         active: true,
+        externalField: {
+          label: 'missing_param'
+        }
       }
     };
     const jsonSchema = {
@@ -118,15 +121,20 @@ describe('converter.js', () => {
           active: {
             type: 'boolean'
           },
+          externalField: {
+            type: 'null'
+          },
         }
       }
     };
     // When
     const result = await JsonNodeNormalizer.normalize(jsonToNormalize, jsonSchema);
+    console.log(result);
     expect(Array.isArray(result.fields.orders)).toBe(true);
     expect(Number.isInteger(result.fields.age)).toBe(true);
     expect(Number.isInteger(result.fields.phone)).toBe(true);
     expect(typeof result.fields.id === 'string').toBe(true);
     expect(typeof result.fields.active === 'boolean').toBe(true);
+    expect(result.fields.externalField).toBe(null);
   });
 });
