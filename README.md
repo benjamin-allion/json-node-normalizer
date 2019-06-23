@@ -22,6 +22,7 @@ NodeJS module that normalize json data types from json schema specifications.
     * `number`, `integer`
     * `array`
     * `boolean`
+    * `null`
 * Json Schema $Ref / Definitions support    
 
 ## Installation
