@@ -54,6 +54,9 @@ const jsonData = {
       "orders":{ // Must be an array
          "label": "first_order"
       },
+      "externalData": {
+         "id": "1234"
+      },  // Must be a null
       "active": "true" // Must be a boolean
    }
 }
@@ -66,30 +69,33 @@ const jsonSchema = {
       "type":"object",
       "properties":{
          "id":{
-            "type":"string"
+            "type": "string"
          },
          "name":{
-            "type":"string"
+            "type": "string"
          },
          "firstName":{
-            "type":"string"
+            "type": "string"
          },
          "age":{
-            "type":"number"
+            "type": "number"
          },
          "phone":{
-            "type":"integer"
+            "type": "integer"
          },
          "orders":{
-            "type":"array",
+            "type": "array",
             "items":{
                "label":{
-                  "type":"string"
+                  "type": "string"
                }
             }
          },
+         "externalData": {
+            "type": "null"
+         },
          "active":{
-            "type":"boolean"
+            "type": "boolean"
          }
       }
    }
@@ -113,6 +119,7 @@ result = {
       "orders":[{
          "label": "first_order"
       }],
+      "externalData": null,
       "active": true
    }
 }

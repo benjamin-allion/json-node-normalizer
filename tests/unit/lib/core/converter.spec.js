@@ -86,6 +86,9 @@ describe('converter.js', () => {
           label: 'first_order'
         },
         active: true,
+        externalField: {
+          label: 'missing_param'
+        }
       }
     };
     const jsonSchema = {
@@ -118,6 +121,9 @@ describe('converter.js', () => {
           active: {
             type: 'boolean'
           },
+          externalField: {
+            type: 'null'
+          },
         }
       }
     };
@@ -128,5 +134,6 @@ describe('converter.js', () => {
     expect(Number.isInteger(result.fields.phone)).toBe(true);
     expect(typeof result.fields.id === 'string').toBe(true);
     expect(typeof result.fields.active === 'boolean').toBe(true);
+    expect(result.fields.externalField).toBe(null);
   });
 });
