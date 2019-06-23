@@ -26,13 +26,13 @@
   "author": "ALLION Benjamin, BENBRAHIM Rayed",
   "license": "MIT",
   "dependencies": {
-    "codacy-coverage": "^3.4.0",
     "json-schema-deref": "^0.5.0",
     "jsonpath": "^1.0.2",
     "winston": "^3.2.1"
   },
   "devDependencies": {
     "cross-env": "^5.2.0",
+    "codacy-coverage": "^3.4.0",
     "eslint": "^4.19.1",
     "eslint-config-airbnb-base": "^13.1.0",
     "eslint-config-prettier": "^4.1.0",
