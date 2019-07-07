@@ -1,7 +1,7 @@
 const JsonNodeNormalizer = require('../../../../index');
 const jsonSample = require('../../mock-sample/json');
 
-describe('converter.js', () => {
+describe('normalizer.js', () => {
   it('try to convert field to undefined type', () => {
     // Given
     let jsonToConvert = { ...jsonSample };
@@ -13,7 +13,7 @@ describe('converter.js', () => {
   });
 });
 
-describe('converter.js', () => {
+describe('normalizer.js', () => {
   it('try to normalize json data from json schema', async () => {
     // Given
     const jsonToNormalize = {
@@ -72,7 +72,7 @@ describe('converter.js', () => {
   });
 });
 
-describe('converter.js', () => {
+describe('normalizer.js', () => {
   it(`try to normalize json data that should not be normalized from json schema`, async () => {
     // Given
     const jsonToNormalize = {
