@@ -4,6 +4,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.0.3] - 2019-07-23
+### Added
+- Normalization field type configuration support (See #13).
+- Optimising dependencies :
+  Remove useless development dependencies.
+  Upgrade all dependencies to latest versions.
+  Fix 'lodash' development dependency security vulnerability. (See #16)
+
 ## [1.0.2] - 2019-06-23
 ### Added
 - 'null' type support
