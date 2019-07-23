@@ -194,6 +194,49 @@ By default the logging level is set to 'info'.
 
 You can override the logging level by setting the `JSON_NODE_NORMALIZER_LOGGING_LEVEL` environment variable.
 
+## JsonNodeNormalizer Configuration
+
+For more specific usages, you can specify some configuration parameters when you use 'normalize' method : 
+
+#### Normalization type field name
+
+Could be used in case that you want to use other field than 'type' to specify the target normalization type.
+
+Code sample :
+```javascript
+    // Given
+    const dataToNormalize = { 
+      data: { 
+        enable: 'true' // MUST BE CONVERTED TO BOOLEAN
+      } 
+    };
+    const jsonSchema = {
+      data: {
+        type: 'object',
+        properties: {
+          enable: {
+            normalization_type: 'boolean'  // 'type' by default but in that case we want to use 'normalization_type'
+          }
+        }
+      }
+    };
+    const config = {
+      fieldNames: {
+        type: 'normalization_type' // Configure target normalization field name here !
+      }
+    };
+    const result = await JsonNodeNormalizer.normalize(dataToNormalize, jsonSchema, config);
+```
+
+Result :
+```javascript
+result = {
+   "data":{
+      "enable": true
+   }
+}
+```
+
 ## License
 
 [MIT License](http://www.opensource.org/licenses/mit-license.php).
