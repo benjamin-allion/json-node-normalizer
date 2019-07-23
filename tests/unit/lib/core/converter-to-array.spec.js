@@ -2,7 +2,7 @@ const JsonNodeNormalizer = require('../../../../index');
 const { NodeTypes } = require('../../../../index');
 const jsonSample = require('../../mock-sample/json');
 
-describe('converter.js', () => {
+describe('normalizer.js', () => {
   it('simple field conversion \'root.subField\' (by string path)', () => {
     // Given
     const jsonToConvert = { ...jsonSample };
@@ -15,7 +15,7 @@ describe('converter.js', () => {
   });
 });
 
-describe('converter.js', () => {
+describe('normalizer.js', () => {
   it('simple field conversion \'root.subField\' (by jsonPath)', () => {
     // Given
     const jsonToConvert = { ...jsonSample };
@@ -28,7 +28,7 @@ describe('converter.js', () => {
   });
 });
 
-describe('converter.js', () => {
+describe('normalizer.js', () => {
   it('multiple fields conversion \'root.subField\'', () => {
     // Given
     const jsonToConvert = { ...jsonSample };
@@ -43,7 +43,7 @@ describe('converter.js', () => {
   });
 });
 
-describe('converter.js', () => {
+describe('normalizer.js', () => {
   it('try to convert field that is already an array \'root.subArray\'', () => {
     // Given
     const jsonToConvert = { ...jsonSample };
@@ -56,7 +56,7 @@ describe('converter.js', () => {
   });
 });
 
-describe('converter.js', () => {
+describe('normalizer.js', () => {
   it('try to convert an unknown field \'root.unknown\'', () => {
     // Given
     const jsonToConvert = { ...jsonSample };
@@ -68,7 +68,7 @@ describe('converter.js', () => {
   });
 });
 
-describe('converter.js', () => {
+describe('normalizer.js', () => {
   it('property of array entries conversion \'root.subArray.*.mArrayProperty\'', () => {
     // Given
     const jsonToConvert = { ...jsonSample };
@@ -84,7 +84,7 @@ describe('converter.js', () => {
   });
 });
 
-describe('converter.js', () => {
+describe('normalizer.js', () => {
   it('property of array of array entries conversion (multiple sub-levels) \'root.subArray.*.mArrayProperty.*.values\'', () => {
     // Given
     const jsonToConvert = { ...jsonSample };
