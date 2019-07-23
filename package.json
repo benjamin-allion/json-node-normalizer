@@ -11,8 +11,8 @@
   "main": "index.js",
   "scripts": {
     "test": "cross-env JSON_NODE_NORMALIZER_LOGGING_LEVEL=debug jest",
-    "lint": "eslint \"./lib/**/*.js\" \"./config/**/*.js\" \"./test/**/*.js\"",
-    "lint:fix": "eslint --fix \"./lib/**/*.js\" \"./config/**/*.js\" \"./test/**/*.js\"",
+    "lint": "eslint \"./lib/**/*.js\" \"./config/**/*.js\" \"./tests/**/*.js\"",
+    "lint:fix": "eslint --fix \"./lib/**/*.js\" \"./config/**/*.js\" \"./tests/**/*.js\"",
     "coverage": "cross-env JSON_NODE_NORMALIZER_LOGGING_LEVEL=debug jest --coverage",
     "coverage:codacy": "yarn coverage && cat ./coverage/lcov.info | codacy-coverage"
   },
