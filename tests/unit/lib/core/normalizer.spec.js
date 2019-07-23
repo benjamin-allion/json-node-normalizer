@@ -64,15 +64,14 @@ describe('normalizer.js', () => {
     };
     // When
     const result = await JsonNodeNormalizer.normalize(jsonToNormalize, jsonSchema);
+    // Then
     expect(Array.isArray(result.fields.orders)).toBe(true);
     expect(Number.isInteger(result.fields.age)).toBe(true);
     expect(Number.isInteger(result.fields.phone)).toBe(true);
     expect(typeof result.fields.id === 'string').toBe(true);
     expect(typeof result.fields.active === 'boolean').toBe(true);
   });
-});
 
-describe('normalizer.js', () => {
   it('try to normalize json data that should not be normalized from json schema', async () => {
     // Given
     const jsonToNormalize = {
@@ -129,11 +128,36 @@ describe('normalizer.js', () => {
     };
     // When
     const result = await JsonNodeNormalizer.normalize(jsonToNormalize, jsonSchema);
+    // Then
     expect(Array.isArray(result.fields.orders)).toBe(true);
     expect(Number.isInteger(result.fields.age)).toBe(true);
     expect(Number.isInteger(result.fields.phone)).toBe(true);
     expect(typeof result.fields.id === 'string').toBe(true);
     expect(typeof result.fields.active === 'boolean').toBe(true);
     expect(result.fields.externalField).toBe(null);
+  });
+
+  it('should normalize jsonData with specific normalization type field name (See #13)', async () => {
+    // Given
+    const jsonData = { data: { enable: 'true' } };
+    const jsonSchema = {
+      data: {
+        type: 'object',
+        properties: {
+          enable: {
+            normalization_type: 'boolean'
+          }
+        }
+      }
+    };
+    const config = {
+      fieldNames: {
+        type: 'normalization_type'
+      }
+    };
+    // When
+    const result = await JsonNodeNormalizer.normalize(jsonData, jsonSchema, config);
+    // Then
+    expect(typeof result.data.enable).toBe('boolean');
   });
 });
