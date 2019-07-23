@@ -73,7 +73,7 @@ describe('normalizer.js', () => {
 });
 
 describe('normalizer.js', () => {
-  it(`try to normalize json data that should not be normalized from json schema`, async () => {
+  it('try to normalize json data that should not be normalized from json schema', async () => {
     // Given
     const jsonToNormalize = {
       fields: {
