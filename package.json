@@ -21,7 +21,8 @@
     "transform",
     "node",
     "type",
-    "converter"
+    "converter",
+    "normalizer"
   ],
   "author": "ALLION Benjamin, BENBRAHIM Rayed",
   "license": "MIT",
