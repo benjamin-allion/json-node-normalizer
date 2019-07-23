@@ -126,6 +126,40 @@ result = {
 }
 ```
 
+## Other Example
+
+Code sample :
+```javascript
+    // Given
+    const dataToNormalize = { 
+      data: { 
+        enable: 'true' // MUST BE CONVERTED TO BOOLEAN
+      } 
+    };
+    const jsonSchema = {
+      data: {
+        type: 'object',
+        properties: {
+          enable: {
+            type: 'boolean'
+          }
+        }
+      }
+    };
+    const result = await JsonNodeNormalizer.normalize(dataToNormalize, jsonSchema);
+```
+
+Result :
+```javascript
+result = {
+   "data":{
+      "enable": true
+   }
+}
+```
+
+You can find some other examples in 'tests' project folder. 
+
 ## Normalize node(s) from path (Without Json-Schema)
 
 You can also use `normalizePath` method if you do not want to use the schema json.
