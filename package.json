@@ -8,6 +8,10 @@
       "url": "https://github.com/benjamin-allion/json-type-converter/graphs/contributors"
     }
   ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/benjamin-allion/json-node-normalizer.git"
+  },
   "main": "index.js",
   "scripts": {
     "test": "cross-env JSON_NODE_NORMALIZER_LOGGING_LEVEL=debug jest",
