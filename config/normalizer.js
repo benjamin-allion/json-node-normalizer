@@ -4,7 +4,8 @@
  */
 const defaultConfig = {
   fieldNames: {
-    type: 'type'
+    type: 'type',
+    format: 'format',
   },
 };
 
