@@ -197,4 +197,45 @@ describe('normalizer.js', () => {
     };
     expect(result).toStrictEqual(expectedResult);
   });
+
+  it('should normalize jsonData from JsonSchema with type & format definitions', async () => {
+    // Given
+    const jsonData = {
+      data: {
+        enable: 'true',
+        firstName: 'must_be_uppercase',
+        lastName: 'MUST_BE_LOWERCASE',
+      }
+    };
+    const jsonSchema = {
+      data: {
+        type: 'object',
+        properties: {
+          enable: {
+            type: 'boolean'
+          },
+          firstName: {
+            type: 'string',
+            format: FormatTypes.UPPERCASE_FORMAT
+          },
+          lastName: {
+            type: 'string',
+            format: FormatTypes.LOWERCASE_FORMAT
+          },
+        }
+      }
+    };
+    // When
+    const result = await JsonNodeNormalizer.normalize(jsonData, jsonSchema);
+    // Then
+    const expectedResult = {
+      data: {
+        enable: true,
+        firstName: 'MUST_BE_UPPERCASE',
+        lastName: 'must_be_lowercase'
+      }
+    };
+    expect(result).toStrictEqual(expectedResult);
+  });
+
 });
