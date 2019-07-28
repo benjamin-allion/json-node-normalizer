@@ -1,6 +1,7 @@
 const JsonNodeNormalizer = require('../../../../index');
 const jsonSample = require('../../mock-sample/json');
 const { FormatTypes } = require('../../../../lib/core/formats');
+const { NodeTypes } = require('../../../../lib/core/types');
 
 describe('normalizer.js', () => {
   it('try to convert field to undefined type', () => {
@@ -238,4 +239,33 @@ describe('normalizer.js', () => {
     expect(result).toStrictEqual(expectedResult);
   });
 
+  it('should normalize jsonData from JsonPaths with type & format definitions', async () => {
+    // Given
+    const jsonData = {
+      data: {
+        enable: 'true',
+        firstName: 'must_be_uppercase',
+        lastName: 'MUST_BE_LOWERCASE',
+      }
+    };
+    // When
+    let result = await JsonNodeNormalizer.normalizePath(
+      jsonData, '.enable', NodeTypes.BOOLEAN_TYPE
+    );
+    result = await JsonNodeNormalizer.normalizePath(
+      result, '.firstName', NodeTypes.STRING_TYPE, FormatTypes.UPPERCASE_FORMAT
+    );
+    result = await JsonNodeNormalizer.normalizePath(
+      result, '.lastName', NodeTypes.STRING_TYPE, FormatTypes.LOWERCASE_FORMAT
+    );
+    // Then
+    const expectedResult = {
+      data: {
+        enable: true,
+        firstName: 'MUST_BE_UPPERCASE',
+        lastName: 'must_be_lowercase'
+      }
+    };
+    expect(result).toStrictEqual(expectedResult);
+  });
 });
