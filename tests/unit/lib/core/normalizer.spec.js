@@ -165,19 +165,19 @@ describe('normalizer.js', () => {
     // Given
     const jsonData = {
       data: {
-        firstName: 'must_be_uppercase',
-        lastName: 'MUST_BE_LOWERCASE',
+        lastName: 'must_be_uppercase',
+        firstName: 'MUST_BE_LOWERCASE',
       }
     };
     const jsonSchema = {
       data: {
         type: 'object',
         properties: {
-          firstName: {
+          lastName: {
             type: 'string',
             normalization_format: FormatTypes.UPPERCASE_FORMAT
           },
-          lastName: {
+          firstName: {
             type: 'string',
             normalization_format: FormatTypes.LOWERCASE_FORMAT
           },
@@ -192,8 +192,8 @@ describe('normalizer.js', () => {
     // Then
     const expectedResult = {
       data: {
-        firstName: 'MUST_BE_UPPERCASE',
-        lastName: 'must_be_lowercase',
+        lastName: 'MUST_BE_UPPERCASE',
+        firstName: 'must_be_lowercase',
       }
     };
     expect(result).toStrictEqual(expectedResult);
@@ -204,8 +204,8 @@ describe('normalizer.js', () => {
     const jsonData = {
       data: {
         enable: 'true',
-        firstName: 'must_be_uppercase',
-        lastName: 'MUST_BE_LOWERCASE',
+        lastName: 'must_be_uppercase',
+        firstName: 'MUST_BE_LOWERCASE',
       }
     };
     const jsonSchema = {
@@ -215,11 +215,11 @@ describe('normalizer.js', () => {
           enable: {
             type: 'boolean'
           },
-          firstName: {
+          lastName: {
             type: 'string',
             format: FormatTypes.UPPERCASE_FORMAT
           },
-          lastName: {
+          firstName: {
             type: 'string',
             format: FormatTypes.LOWERCASE_FORMAT
           },
@@ -232,8 +232,8 @@ describe('normalizer.js', () => {
     const expectedResult = {
       data: {
         enable: true,
-        firstName: 'MUST_BE_UPPERCASE',
-        lastName: 'must_be_lowercase'
+        lastName: 'MUST_BE_UPPERCASE',
+        firstName: 'must_be_lowercase',
       }
     };
     expect(result).toStrictEqual(expectedResult);
@@ -244,8 +244,8 @@ describe('normalizer.js', () => {
     const jsonData = {
       data: {
         enable: 'true',
-        firstName: 'must_be_uppercase',
-        lastName: 'MUST_BE_LOWERCASE',
+        firstName: 'MUST_BE_LOWERCASE',
+        lastName: 'must_be_uppercase',
       }
     };
     // When
@@ -253,17 +253,17 @@ describe('normalizer.js', () => {
       jsonData, '.enable', NodeTypes.BOOLEAN_TYPE
     );
     result = await JsonNodeNormalizer.normalizePath(
-      result, '.firstName', NodeTypes.STRING_TYPE, FormatTypes.UPPERCASE_FORMAT
+      result, '.lastName', NodeTypes.STRING_TYPE, FormatTypes.UPPERCASE_FORMAT
     );
     result = await JsonNodeNormalizer.normalizePath(
-      result, '.lastName', NodeTypes.STRING_TYPE, FormatTypes.LOWERCASE_FORMAT
+      result, '.firstName', NodeTypes.STRING_TYPE, FormatTypes.LOWERCASE_FORMAT
     );
     // Then
     const expectedResult = {
       data: {
         enable: true,
-        firstName: 'MUST_BE_UPPERCASE',
-        lastName: 'must_be_lowercase'
+        lastName: 'MUST_BE_UPPERCASE',
+        firstName: 'must_be_lowercase',
       }
     };
     expect(result).toStrictEqual(expectedResult);
