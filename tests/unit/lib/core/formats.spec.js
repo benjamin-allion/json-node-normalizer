@@ -44,4 +44,17 @@ describe('formats.js', () => {
     // Then
     expect(normalizedNode).toBe(jsonNode);
   });
+
+  it('try to normalize unknown json type object that cannot be formatted', async () => {
+    // Given
+    const jsonNode = new UnknownType('TEST');
+    const targetFormat = FormatTypes.LOWERCASE_FORMAT;
+
+    // When
+    const normalizedNode = normalizeFormat(jsonNode, targetFormat);
+
+    // Then
+    expect(typeof normalizedNode).toBe('object');
+    expect(normalizedNode).toBe(jsonNode);
+  });
 });
