@@ -1,5 +1,11 @@
 const { FormatTypes, normalizeFormat } = require('../../../../lib/core/formats');
 
+class UnknownType {
+  constructor(value) {
+    this.value = value;
+  }
+}
+
 describe('formats.js', () => {
   it('try to normalize json node to \'UPPERCASE_FORMAT\'', async () => {
     // Given
@@ -25,5 +31,17 @@ describe('formats.js', () => {
     // Then
     const expectedResult = 'test';
     expect(normalizedNode).toBe(expectedResult);
+  });
+
+  it('try to normalize json node to unknown format', async () => {
+    // Given
+    const jsonNode = 'TEST';
+    const targetFormat = 'unknown';
+
+    // When
+    const normalizedNode = normalizeFormat(jsonNode, targetFormat);
+
+    // Then
+    expect(normalizedNode).toBe(jsonNode);
   });
 });
