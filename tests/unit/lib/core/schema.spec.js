@@ -1,4 +1,4 @@
-const { deReferenceSchema, getFieldPaths, getFieldsToNormalize } = require('../../../../lib/core/schema');
+const { deReferenceSchema, _getFieldPaths, getFieldsToNormalize } = require('../../../../lib/core/schema');
 const { schemaWithRef } = require('../../mock-sample/json-schema');
 
 describe('schema.js', () => {
@@ -14,7 +14,7 @@ describe('schema.js', () => {
 describe('schema.js', () => {
   it('try to get all field types from Json Schema', async () => {
     const schemaWithoutRef = await deReferenceSchema(schemaWithRef);
-    const typePaths = getFieldPaths(schemaWithoutRef);
+    const typePaths = _getFieldPaths(schemaWithoutRef);
     expect(typePaths).toContainEqual('$.properties.fruits');
     expect(typePaths).toContainEqual('$.properties.vegetables');
     expect(typePaths).toContainEqual('$.properties.fruits.items');

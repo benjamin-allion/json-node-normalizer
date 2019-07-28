@@ -3,10 +3,8 @@
  * @type {object}
  */
 const defaultConfig = {
-  fieldNames: {
-    type: 'type',
-    format: 'format',
-  },
+  typeFieldName: 'type',
+  formatFieldName: 'format',
 };
 
 module.exports = {

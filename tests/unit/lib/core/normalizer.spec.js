@@ -1,5 +1,6 @@
 const JsonNodeNormalizer = require('../../../../index');
 const jsonSample = require('../../mock-sample/json');
+const { FormatTypes } = require('../../../../lib/core/formats');
 
 describe('normalizer.js', () => {
   it('try to convert field to undefined type', () => {
@@ -151,13 +152,49 @@ describe('normalizer.js', () => {
       }
     };
     const config = {
-      fieldNames: {
-        type: 'normalization_type'
-      }
+      typeFieldName: 'normalization_type'
     };
     // When
     const result = await JsonNodeNormalizer.normalize(jsonData, jsonSchema, config);
     // Then
     expect(typeof result.data.enable).toBe('boolean');
+  });
+
+  it('should normalize jsonData with specific normalization format field name (See #19)', async () => {
+    // Given
+    const jsonData = {
+      data: {
+        firstName: 'must_be_uppercase',
+        lastName: 'MUST_BE_LOWERCASE',
+      }
+    };
+    const jsonSchema = {
+      data: {
+        type: 'object',
+        properties: {
+          firstName: {
+            type: 'string',
+            normalization_format: FormatTypes.UPPERCASE_FORMAT
+          },
+          lastName: {
+            type: 'string',
+            normalization_format: FormatTypes.LOWERCASE_FORMAT
+          },
+        }
+      }
+    };
+    const config = {
+      formatFieldName: 'normalization_format'
+    };
+    // When
+    const result = await JsonNodeNormalizer.normalize(jsonData, jsonSchema, config);
+    // Then
+    const expectedResult = {
+      data: {
+        firstName: 'MUST_BE_UPPERCASE',
+        lastName: 'must_be_lowercase',
+      }
+    };
+    expect(result).toStrictEqual(expectedResult);
   });
 });
