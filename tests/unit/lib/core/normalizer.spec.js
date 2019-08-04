@@ -175,11 +175,11 @@ describe('normalizer.js', () => {
         properties: {
           lastName: {
             type: 'string',
-            normalization_format: FormatTypes.UPPERCASE_FORMAT
+            normalization_format: FormatTypes.UPPERCASE
           },
           firstName: {
             type: 'string',
-            normalization_format: FormatTypes.LOWERCASE_FORMAT
+            normalization_format: FormatTypes.LOWERCASE
           },
         }
       }
@@ -217,11 +217,11 @@ describe('normalizer.js', () => {
           },
           lastName: {
             type: 'string',
-            format: FormatTypes.UPPERCASE_FORMAT
+            format: FormatTypes.UPPERCASE
           },
           firstName: {
             type: 'string',
-            format: FormatTypes.LOWERCASE_FORMAT
+            format: FormatTypes.LOWERCASE
           },
         }
       }
@@ -253,10 +253,10 @@ describe('normalizer.js', () => {
       jsonData, '.enable', NodeTypes.BOOLEAN_TYPE
     );
     result = await JsonNodeNormalizer.normalizePath(
-      result, '.lastName', NodeTypes.STRING_TYPE, FormatTypes.UPPERCASE_FORMAT
+      result, '.lastName', NodeTypes.STRING_TYPE, FormatTypes.UPPERCASE
     );
     result = await JsonNodeNormalizer.normalizePath(
-      result, '.firstName', NodeTypes.STRING_TYPE, FormatTypes.LOWERCASE_FORMAT
+      result, '.firstName', NodeTypes.STRING_TYPE, FormatTypes.LOWERCASE
     );
     // Then
     const expectedResult = {

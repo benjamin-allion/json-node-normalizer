@@ -7,10 +7,10 @@ class UnknownType {
 }
 
 describe('formats.js', () => {
-  it('try to normalize json node to \'UPPERCASE_FORMAT\'', async () => {
+  it('try to normalize json node to \'UPPERCASE\'', async () => {
     // Given
     const jsonNode = 'test';
-    const targetFormat = FormatTypes.UPPERCASE_FORMAT;
+    const targetFormat = FormatTypes.UPPERCASE;
 
     // When
     const normalizedNode = normalizeFormat(jsonNode, targetFormat);
@@ -20,10 +20,10 @@ describe('formats.js', () => {
     expect(normalizedNode).toBe(expectedResult);
   });
 
-  it('try to normalize json node to \'LOWERCASE_FORMAT\'', async () => {
+  it('try to normalize json node to \'LOWERCASE\'', async () => {
     // Given
     const jsonNode = 'TEST';
-    const targetFormat = FormatTypes.LOWERCASE_FORMAT;
+    const targetFormat = FormatTypes.LOWERCASE;
 
     // When
     const normalizedNode = normalizeFormat(jsonNode, targetFormat);
@@ -48,7 +48,7 @@ describe('formats.js', () => {
   it('try to normalize unknown json type object that cannot be formatted', async () => {
     // Given
     const jsonNode = new UnknownType('TEST');
-    const targetFormat = FormatTypes.LOWERCASE_FORMAT;
+    const targetFormat = FormatTypes.LOWERCASE;
 
     // When
     const normalizedNode = normalizeFormat(jsonNode, targetFormat);
