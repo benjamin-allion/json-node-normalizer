@@ -4,6 +4,32 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.0.4] - In progress, release soon...
+### Warning
+- Normalization field type configuration has been renamed :
+
+Before : 
+```javascript
+    const config = {
+      fieldNames: {
+        type: 'normalization_type'
+      }
+    };
+```
+
+Now :
+```javascript
+    const config = {
+      typeFieldName: 'normalization_type',
+      formatFieldName: 'normalization_format'
+    };
+```
+
+### Added
+- String formatting support (See #14, #15).
+- Refactoring & fix some methods documentation problems.
+- Fix config merge deep problem.
+
 ## [1.0.3] - 2019-07-23
 ### Added
 - Normalization field type configuration support (See #13).
