@@ -18,6 +18,7 @@ module.exports = {
         "comma-dangle": 'off',
         "no-use-before-define": 'off',
         "class-methods-use-this": 'off',
-        "linebreak-style": 0
+        "linebreak-style": 0,
+        "arrow-parens": 'off'
     }
 };
