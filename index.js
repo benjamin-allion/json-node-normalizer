@@ -1,3 +1,3 @@
-const { normalize, normalizePath, NodeTypes } = require('./lib');
+const { normalize, normalizePath, NodeTypes, oasFlatten } = require('./lib');
 
-module.exports = { normalize, normalizePath, NodeTypes };
+module.exports = { normalize, normalizePath, NodeTypes, oasFlatten };

@@ -1,0 +1,89 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "my-api",
+    "version": "1.0.0"
+  },
+  "paths": {
+    "/pets/": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "List",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Pet"
+                  },
+                  "discriminator": {
+                    "propertyName": "pet_type"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/pets/:id": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "1 pet",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Pet"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Pet": {
+        "anyOf": [
+          {
+            "$ref": "#/components/schemas/Dog"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "integer"
+              },
+              "name": {
+                "type": "string"
+              },
+              "isKnown": {
+                "type": "boolean"
+              }
+            },
+            "required": [
+              "id"
+            ]
+          },
+          {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "integer"
+              },
+              "isKnown": {
+                "type": "boolean"
+              }
+            },
+            "required": [
+              "id"
+            ]
+          }
+        ]
+      }
+    }
+  }
+}

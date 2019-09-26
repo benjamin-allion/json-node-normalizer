@@ -1,0 +1,230 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "my-api",
+    "version": "1.0.0"
+  },
+  "paths": {
+    "/pets/": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "List",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "category": {
+                        "type": "string"
+                      },
+                      "name": {
+                        "type": "string"
+                      },
+                      "isKnown": {
+                        "type": "boolean"
+                      },
+                      "race": {
+                        "type": "string"
+                      },
+                      "id": {
+                        "type": "integer"
+                      },
+                      "measurement": {
+                        "type": "object",
+                        "properties": {
+                          "height": {
+                            "type": "integer"
+                          },
+                          "weight": {
+                            "type": "integer"
+                          }
+                        }
+                      }
+                    },
+                    "required": [
+                      "id",
+                      "isKnown",
+                      "name",
+                      "race"
+                    ]
+                  },
+                  "discriminator": {
+                    "propertyName": "pet_type"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/pets/:id": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "1 pet",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "category": {
+                      "type": "string"
+                    },
+                    "name": {
+                      "type": "string"
+                    },
+                    "isKnown": {
+                      "type": "boolean"
+                    },
+                    "race": {
+                      "type": "string"
+                    },
+                    "id": {
+                      "type": "integer"
+                    },
+                    "measurement": {
+                      "type": "object",
+                      "properties": {
+                        "height": {
+                          "type": "integer"
+                        },
+                        "weight": {
+                          "type": "integer"
+                        }
+                      }
+                    }
+                  },
+                  "required": [
+                    "id",
+                    "isKnown",
+                    "name",
+                    "race"
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Animal": {
+        "type": "object",
+        "required": [
+          "race",
+          "id"
+        ],
+        "properties": {
+          "race": {
+            "type": "string"
+          },
+          "id": {
+            "type": "integer"
+          },
+          "measurement": {
+            "type": "object",
+            "properties": {
+              "height": {
+                "type": "integer"
+              },
+              "weight": {
+                "type": "integer"
+              }
+            }
+          }
+        }
+      },
+      "Pet": {
+        "type": "object",
+        "properties": {
+          "category": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "isKnown": {
+            "type": "boolean"
+          },
+          "race": {
+            "type": "string"
+          },
+          "id": {
+            "type": "integer"
+          },
+          "measurement": {
+            "type": "object",
+            "properties": {
+              "height": {
+                "type": "integer"
+              },
+              "weight": {
+                "type": "integer"
+              }
+            }
+          }
+        },
+        "required": [
+          "id",
+          "isKnown",
+          "name",
+          "race"
+        ]
+      },
+      "Dog": {
+        "type": "object",
+        "properties": {
+          "category": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "isKnown": {
+            "type": "boolean"
+          },
+          "race": {
+            "type": "string"
+          },
+          "id": {
+            "type": "integer"
+          },
+          "measurement": {
+            "type": "object",
+            "properties": {
+              "height": {
+                "type": "integer"
+              },
+              "weight": {
+                "type": "integer"
+              }
+            }
+          }
+        },
+        "required": [
+          "isKnown",
+          "name",
+          "race",
+          "id"
+        ]
+      },
+      "measurement": {
+        "type": "object",
+        "properties": {
+          "height": {
+            "type": "integer"
+          },
+          "weight": {
+            "type": "integer"
+          }
+        }
+      }
+    }
+  }
+}

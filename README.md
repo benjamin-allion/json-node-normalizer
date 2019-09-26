@@ -174,6 +174,31 @@ normalizedJson = JsonNodeNormalizer.normalizePath(jsonData, '.fields.orders[*].l
 normalizedJson = JsonNodeNormalizer.normalizePath(jsonData, '..active', NodeTypes.BOOLEAN_TYPE);
 ```
 
+## Play with Swagger 2 & Openapi 3 specification
+
+In Swagger 2 and Openapi 3 specification, you can use ```$ref```, ```allOf```, ```anyOf```, ```oneOf``` in definition of objects
+
+If you want use a definition of object with this key words, you need flatter the definition like this:
+
+```
+const openapi_spec_flattered = JsonNodeNormalizer.oasFlatten(openapi_spec);
+```
+
+Example with a Swagger 2 specification:
+```
+cont openapi_spec = require('./docs/my-swagger.json');
+openapi_spec_flattered = JsonNodeNormalizer.oasFlatten(openapi_spec);
+...
+jsonData = {
+   id: 1
+   name: 'Rex',
+   color: 'brown chocolate'
+}
+...
+const normalizedJson = await JsonNodeNormalizer.normalize(jsonData, openapi_spec_flattered.definitions.Pet);
+...
+```
+
 ## JsonPath Documentation
 
 See https://github.com/json-path/JsonPath for more information about JsonPath expressions.
