@@ -59,6 +59,6 @@ describe('types.js', () => {
     // When
     jsonToNormalize = JsonNodeNormalizer.normalizePath(jsonToNormalize, 'fieldToNormalize', targetType);
     // Then
-    expect(jsonToNormalize).toEqual(NaN);
+    expect(jsonToNormalize).toEqual({ fieldToNormalize: NaN });
   });
 });
