@@ -29,6 +29,7 @@ Now :
 - String formatting support (See #14, #15).
 - Refactoring & fix some methods documentation problems.
 - Fix config merge deep problem.
+- 'oasFlatten' method to flat the definition (for Swagger 2 & Openapi 3 specifications support)
 
 ## [1.0.3] - 2019-07-23
 ### Added
