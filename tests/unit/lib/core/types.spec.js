@@ -11,4 +11,24 @@ describe('types.js', () => {
     // Then
     expect(jsonToNormalize).toEqual({ fieldToNormalize: 123 });
   });
+
+  it(`must convert 'String' to 'Number' (Decimal Support)`, () => {
+    // Given
+    let jsonToNormalize = { fieldToNormalize: '123.23' };
+    const targetType = NodeTypes.NUMBER_TYPE;
+    // When
+    jsonToNormalize = JsonNodeNormalizer.normalizePath(jsonToNormalize, 'fieldToNormalize', targetType);
+    // Then
+    expect(jsonToNormalize).toEqual({ fieldToNormalize: 123.23 });
+  });
+
+  it(`must convert 'String' to 'Number' (Decimal Support)`, () => {
+    // Given
+    let jsonToNormalize = { fieldToNormalize: '123,23' };
+    const targetType = NodeTypes.NUMBER_TYPE;
+    // When
+    jsonToNormalize = JsonNodeNormalizer.normalizePath(jsonToNormalize, 'fieldToNormalize', targetType);
+    // Then
+    expect(jsonToNormalize).toEqual({ fieldToNormalize: 123.23 });
+  });
 });
