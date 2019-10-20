@@ -51,4 +51,14 @@ describe('types.js', () => {
     // Then
     expect(jsonToNormalize).toEqual({ fieldToNormalize: 123.123 });
   });
+
+  it(`must convert object to NaN`, () => {
+    // Given
+    let jsonToNormalize = { fieldToNormalize: { impossibleToConvertToNumber: true } };
+    const targetType = NodeTypes.NUMBER_TYPE;
+    // When
+    jsonToNormalize = JsonNodeNormalizer.normalizePath(jsonToNormalize, 'fieldToNormalize', targetType);
+    // Then
+    expect(jsonToNormalize).toEqual(NaN);
+  });
 });
