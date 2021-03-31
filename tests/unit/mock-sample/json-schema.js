@@ -1,4 +1,3 @@
-
 const schemaWithRef = {
   $id: 'https://example.com/arrays.schema.json',
   $schema: 'http://json-schema.org/draft-07/schema#',
