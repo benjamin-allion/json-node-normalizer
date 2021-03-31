@@ -1,6 +1,6 @@
 {
   "name": "json-node-normalizer",
-  "version": "1.0.3",
+  "version": "1.0.5",
   "description": "NodeJS module that normalize json data types from json schema specifications.",
   "contributors": [
     {
@@ -33,16 +33,17 @@
   "dependencies": {
     "json-schema-deref": "^0.5.0",
     "jsonpath": "^1.0.2",
+    "lodash": "^4.17.15",
     "winston": "^3.2.1"
   },
   "devDependencies": {
-    "cross-env": "^5.2.1",
     "codacy-coverage": "^3.4.0",
-    "eslint": "^6.3.0",
+    "cross-env": "6.0.3",
+    "eslint": "6.8.0",
     "eslint-config-airbnb-base": "^14.0.0",
-    "eslint-plugin-import": "^2.18.2",
-    "eslint-plugin-node": "^9.2.0",
-    "eslint-plugin-prettier": "^3.1.0",
+    "eslint-plugin-import": "2.19.1",
+    "eslint-plugin-node": "11.0.0",
+    "eslint-plugin-prettier": "3.1.2",
     "eslint-plugin-promise": "^4.2.1",
     "jest": "^24.9.0"
   }

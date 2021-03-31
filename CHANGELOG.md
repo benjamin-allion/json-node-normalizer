@@ -4,31 +4,24 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [1.0.4] - In progress, release soon...
-### Warning
-- Normalization field type configuration has been renamed :
+## [1.0.6] - In progress, release soon...
 
-Before : 
-```javascript
-    const config = {
-      fieldNames: {
-        type: 'normalization_type'
-      }
-    };
-```
+## [1.0.5] - 2019-12-29
+- Fix dependencies security vulnerability. (See #28)
 
-Now :
-```javascript
-    const config = {
-      typeFieldName: 'normalization_type',
-      formatFieldName: 'normalization_format'
-    };
-```
+## [1.0.4] - 2019-11-06
+
+### Major bugfix
+- Fix boolean not correctly normalized / converted. 
+  See [#26](https://github.com/benjamin-allion/json-node-normalizer/issues/26)
+- Fix number with decimal normalization support. See [#24](https://github.com/benjamin-allion/json-node-normalizer/issues/24)
+- Fix JsonNodeNormalizer configuration support.
 
 ### Added
 - String formatting support (See #14, #15).
+  You can now normalize string type into lowercase / uppercase.
 - Refactoring & fix some methods documentation problems.
-- Fix config merge deep problem.
+- 'oasFlatten' method to flat the definition (for Swagger 2 & Openapi 3 specifications support)
 
 ## [1.0.3] - 2019-07-23
 ### Added
