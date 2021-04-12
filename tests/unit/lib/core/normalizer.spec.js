@@ -9,7 +9,7 @@ describe('normalizer.js', () => {
     let jsonToConvert = { ...jsonSample };
     const targetType = 'UNKNOW_TYPE';
     // When
-    jsonToConvert = JsonNodeNormalizer.normalizePath(jsonToConvert, 'root.subField', targetType);
+    jsonToConvert = JsonNodeNormalizer.normalizePaths({ jsonNode: jsonToConvert, paths: ['root.subField'], type: targetType });
     // Then
     expect(jsonToConvert).toEqual(jsonSample);
   });
@@ -249,15 +249,23 @@ describe('normalizer.js', () => {
       }
     };
     // When
-    let result = await JsonNodeNormalizer.normalizePath(
-      jsonData, '.enable', NodeTypes.BOOLEAN_TYPE
-    );
-    result = await JsonNodeNormalizer.normalizePath(
-      result, '.lastName', NodeTypes.STRING_TYPE, FormatTypes.UPPERCASE
-    );
-    result = await JsonNodeNormalizer.normalizePath(
-      result, '.firstName', NodeTypes.STRING_TYPE, FormatTypes.LOWERCASE
-    );
+    let result = await JsonNodeNormalizer.normalizePaths({
+      jsonNode: jsonData,
+      paths: ['.enable'],
+      type: NodeTypes.BOOLEAN_TYPE
+    });
+    result = await JsonNodeNormalizer.normalizePaths({
+      jsonNode: result,
+      paths: ['.lastName'],
+      type: NodeTypes.STRING_TYPE,
+      format: FormatTypes.UPPERCASE
+    });
+    result = await JsonNodeNormalizer.normalizePaths({
+      jsonNode: result,
+      paths: ['.firstName'],
+      type: NodeTypes.STRING_TYPE,
+      format: FormatTypes.LOWERCASE
+    });
     // Then
     const expectedResult = {
       data: {
