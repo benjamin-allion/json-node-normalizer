@@ -52,9 +52,12 @@ const jsonData = {
       "firstName":"firstName",
       "age": "31", // Must be a number
       "phone": "33600000010", // Must be a number
-      "orders":{ // Must be an array
-         "label": "first_order"
-      },
+      "orders": [{ 
+         // Must contain a "label" fields with default value
+         "articles": { // Must be an array
+           "price": "15.4"
+         }
+      }],
       "externalData": {
          "id": "1234"
       },  // Must be a null
@@ -88,7 +91,14 @@ const jsonSchema = {
             "type": "array",
             "items":{
                "label":{
-                  "type": "string"
+                  "type": "string",
+                  "default": "Empty order"
+               },
+               "articles": {
+                  "type": "array",
+                  "items": {
+                    "price": { "type": "string" }
+                  }
                }
             }
          },
@@ -118,7 +128,10 @@ result = {
       "age": 31,
       "phone": 33600000010,
       "orders":[{
-         "label": "first_order"
+         "label": "Empty order", 
+         "articles": [{
+           "price": "15.4"
+         }]
       }],
       "externalData": null,
       "active": true
@@ -162,16 +175,25 @@ You can find some other examples in 'tests' project folder.
 
 ## Normalize node(s) from path (Without Json-Schema)
 
-You can also use `normalizePath` method if you do not want to use the schema json.
+You can also use `normalizePaths` method if you do not want to use the schema json.
 
 ```javascript
 const { JsonNodeNormalizer, NodeTypes } = require('json-node-normalizer');
-let normalizedJson = JsonNodeNormalizer.normalizePath(jsonData, '.fields.id', NodeTypes.NUMBER_TYPE);
-normalizedJson = JsonNodeNormalizer.normalizePath(jsonData, '.fields.orders', NodeTypes.ARRAY_TYPE);
-normalizedJson = JsonNodeNormalizer.normalizePath(jsonData, '.fields.orders[*].label', NodeTypes.STRING_TYPE);
+let normalizedJson = JsonNodeNormalizer.normalizePaths({ jsonNode: jsonData, paths: ['.fields.id'], type: NodeTypes.NUMBER_TYPE });
+normalizedJson = JsonNodeNormalizer.normalizePaths({ jsonNode: jsonData, paths: ['.fields.orders'], type: NodeTypes.ARRAY_TYPE });
+normalizedJson = JsonNodeNormalizer.normalizePaths({ jsonNode: jsonData, paths: ['.fields.orders[*].label'], type: NodeTypes.STRING_TYPE });
 
 // You can also normalize each element with name 'active' for example...
-normalizedJson = JsonNodeNormalizer.normalizePath(jsonData, '..active', NodeTypes.BOOLEAN_TYPE);
+normalizedJson = JsonNodeNormalizer.normalizePaths({ jsonNode: jsonData, paths: ['..active'], type: NodeTypes.BOOLEAN_TYPE });
+```
+
+## Set default node(s) value from path (Without Json-Schema)
+
+You can also use `normalizePaths` method to set default value (if value doesn't exist).
+
+```javascript
+const { JsonNodeNormalizer, NodeTypes } = require('json-node-normalizer');
+let normalizedJson = JsonNodeNormalizer.normalizePaths({ jsonNode: jsonData, paths: ['.fields.orders[*].label'], type: NodeTypes.STRING_TYPE, defaultValue: 'Empty Order' });
 ```
 
 ## Play with Swagger 2 & Openapi 3 specification
