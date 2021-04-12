@@ -7,7 +7,7 @@ describe('types.js', () => {
     let jsonToNormalize = { fieldToNormalize: '123' };
     const targetType = NodeTypes.NUMBER_TYPE;
     // When
-    jsonToNormalize = JsonNodeNormalizer.normalizePath(jsonToNormalize, 'fieldToNormalize', targetType);
+    jsonToNormalize = JsonNodeNormalizer.normalizePaths({ jsonNode: jsonToNormalize, paths: ['fieldToNormalize'], type: targetType });
     // Then
     expect(jsonToNormalize).toEqual({ fieldToNormalize: 123 });
   });
@@ -17,7 +17,7 @@ describe('types.js', () => {
     let jsonToNormalize = { fieldToNormalize: '123.23' };
     const targetType = NodeTypes.NUMBER_TYPE;
     // When
-    jsonToNormalize = JsonNodeNormalizer.normalizePath(jsonToNormalize, 'fieldToNormalize', targetType);
+    jsonToNormalize = JsonNodeNormalizer.normalizePaths({ jsonNode: jsonToNormalize, paths: ['fieldToNormalize'], type: targetType });
     // Then
     expect(jsonToNormalize).toEqual({ fieldToNormalize: 123.23 });
   });
@@ -27,7 +27,7 @@ describe('types.js', () => {
     let jsonToNormalize = { fieldToNormalize: '123,23' };
     const targetType = NodeTypes.NUMBER_TYPE;
     // When
-    jsonToNormalize = JsonNodeNormalizer.normalizePath(jsonToNormalize, 'fieldToNormalize', targetType);
+    jsonToNormalize = JsonNodeNormalizer.normalizePaths({ jsonNode: jsonToNormalize, paths: ['fieldToNormalize'], type: targetType });
     // Then
     expect(jsonToNormalize).toEqual({ fieldToNormalize: 123.23 });
   });
@@ -37,7 +37,7 @@ describe('types.js', () => {
     let jsonToNormalize = { fieldToNormalize: 123 };
     const targetType = NodeTypes.NUMBER_TYPE;
     // When
-    jsonToNormalize = JsonNodeNormalizer.normalizePath(jsonToNormalize, 'fieldToNormalize', targetType);
+    jsonToNormalize = JsonNodeNormalizer.normalizePaths({ jsonNode: jsonToNormalize, paths: ['fieldToNormalize'], type: targetType });
     // Then
     expect(jsonToNormalize).toEqual({ fieldToNormalize: 123 });
   });
@@ -47,7 +47,7 @@ describe('types.js', () => {
     let jsonToNormalize = { fieldToNormalize: 123.123 };
     const targetType = NodeTypes.NUMBER_TYPE;
     // When
-    jsonToNormalize = JsonNodeNormalizer.normalizePath(jsonToNormalize, 'fieldToNormalize', targetType);
+    jsonToNormalize = JsonNodeNormalizer.normalizePaths({ jsonNode: jsonToNormalize, paths: ['fieldToNormalize'], type: targetType });
     // Then
     expect(jsonToNormalize).toEqual({ fieldToNormalize: 123.123 });
   });
@@ -57,7 +57,7 @@ describe('types.js', () => {
     let jsonToNormalize = { fieldToNormalize: { impossibleToConvertToNumber: true } };
     const targetType = NodeTypes.NUMBER_TYPE;
     // When
-    jsonToNormalize = JsonNodeNormalizer.normalizePath(jsonToNormalize, 'fieldToNormalize', targetType);
+    jsonToNormalize = JsonNodeNormalizer.normalizePaths({ jsonNode: jsonToNormalize, paths: ['fieldToNormalize'], type: targetType });
     // Then
     expect(jsonToNormalize).toEqual({ fieldToNormalize: NaN });
   });

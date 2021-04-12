@@ -5,6 +5,7 @@
 const defaultConfig = {
   typeFieldName: 'type',
   formatFieldName: 'format',
+  defaultFieldName: 'default'
 };
 
 module.exports = {

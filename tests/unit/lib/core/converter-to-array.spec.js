@@ -8,7 +8,7 @@ describe('normalizer.js', () => {
     const jsonToConvert = { ...jsonSample };
     const targetType = NodeTypes.ARRAY_TYPE;
     // When
-    const result = JsonNodeNormalizer.normalizePath(jsonToConvert, 'root.subField', targetType);
+    const result = JsonNodeNormalizer.normalizePaths({ jsonNode: jsonToConvert, paths: ['root.subField'], type: targetType });
     // Then
     expect(Array.isArray(result.root.subField)).toBe(true);
     expect(result.root.subField[0].mArrayProperty).toMatchObject({ value: 'TEST' });
@@ -21,7 +21,7 @@ describe('normalizer.js', () => {
     const jsonToConvert = { ...jsonSample };
     const targetType = NodeTypes.ARRAY_TYPE;
     // When
-    const result = JsonNodeNormalizer.normalizePath(jsonToConvert, '$.root.subField', targetType);
+    const result = JsonNodeNormalizer.normalizePaths({ jsonNode: jsonToConvert, paths: ['$.root.subField'], type: targetType });
     // Then
     expect(Array.isArray(result.root.subField)).toBe(true);
     expect(result.root.subField[0].mArrayProperty).toMatchObject({ value: 'TEST' });
@@ -34,9 +34,11 @@ describe('normalizer.js', () => {
     const jsonToConvert = { ...jsonSample };
     const targetType = NodeTypes.ARRAY_TYPE;
     // When
-    const result = JsonNodeNormalizer.normalizePath(
-      jsonToConvert, ['root.subField', 'root.subArray'], targetType
-    );
+    const result = JsonNodeNormalizer.normalizePaths({
+      jsonNode: jsonToConvert,
+      paths: ['root.subField', 'root.subArray'],
+      type: targetType
+    });
     // Then
     expect(Array.isArray(result.root.subField)).toBe(true);
     expect(result.root.subField[0].mArrayProperty).toMatchObject({ value: 'TEST' });
@@ -49,7 +51,7 @@ describe('normalizer.js', () => {
     const jsonToConvert = { ...jsonSample };
     const targetType = NodeTypes.ARRAY_TYPE;
     // When
-    const result = JsonNodeNormalizer.normalizePath(jsonToConvert, 'root.subArray', targetType);
+    const result = JsonNodeNormalizer.normalizePaths({ jsonNode: jsonToConvert, paths: ['root.subArray'], type: targetType });
     // Then
     expect(Array.isArray(result.root.subArray)).toBe(true);
     expect(result.root.subArray[0].mArrayProperty).toMatchObject({ value: 'TEST' });
@@ -62,7 +64,7 @@ describe('normalizer.js', () => {
     const jsonToConvert = { ...jsonSample };
     const targetType = NodeTypes.ARRAY_TYPE;
     // When
-    const result = JsonNodeNormalizer.normalizePath(jsonToConvert, 'root.unknown', targetType);
+    const result = JsonNodeNormalizer.normalizePaths({ jsonNode: jsonToConvert, paths: ['root.unknown'], type: targetType });
     // Then
     expect(result.root.unknown).not.toBeDefined();
   });
@@ -74,8 +76,8 @@ describe('normalizer.js', () => {
     const jsonToConvert = { ...jsonSample };
     const targetType = NodeTypes.ARRAY_TYPE;
     // When
-    let result = JsonNodeNormalizer.normalizePath(jsonToConvert, 'root.subArray', targetType);
-    result = JsonNodeNormalizer.normalizePath(result, 'root.subArray.*.mArrayProperty', targetType);
+    let result = JsonNodeNormalizer.normalizePaths({ jsonNode: jsonToConvert, paths: ['root.subArray'], type: targetType });
+    result = JsonNodeNormalizer.normalizePaths({ jsonNode: result, paths: ['root.subArray.*.mArrayProperty'], type: targetType });
     // Then
     expect(Array.isArray(result.root.subArray)).toBe(true);
     expect(result.root.subArray[0].mProperty).toBe('TEST');
@@ -90,11 +92,13 @@ describe('normalizer.js', () => {
     const jsonToConvert = { ...jsonSample };
     const targetType = NodeTypes.ARRAY_TYPE;
     // When
-    let result = JsonNodeNormalizer.normalizePath(jsonToConvert, 'root.subArray', targetType);
-    result = JsonNodeNormalizer.normalizePath(result, 'root.subArray.*.mArrayProperty', targetType);
-    result = JsonNodeNormalizer.normalizePath(
-      result, 'root.subArray.*.mArrayProperty.*.values', targetType
-    );
+    let result = JsonNodeNormalizer.normalizePaths({ jsonNode: jsonToConvert, paths: ['root.subArray'], type: targetType });
+    result = JsonNodeNormalizer.normalizePaths({ jsonNode: result, paths: ['root.subArray.*.mArrayProperty'], type: targetType });
+    result = JsonNodeNormalizer.normalizePaths({
+      jsonNode: result,
+      paths: ['root.subArray.*.mArrayProperty.*.values'],
+      type: targetType
+    });
     // Then
     expect(Array.isArray(result.root.subArray[0].mArrayProperty)).toBe(true);
     expect(Array.isArray(result.root.subArray[1].mArrayProperty)).toBe(true);
