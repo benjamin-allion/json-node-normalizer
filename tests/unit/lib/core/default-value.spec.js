@@ -8,13 +8,31 @@ describe('normalizer.js', () => {
         id: 123,
         name: 'my_name',
         firstName: 'firstName',
-        addresses: [
-          {
-            enable: true,
-            details: [
-              { label: 'test' }
-            ]
-          }
+        addresses: [{
+          enable: true,
+          details: [
+            {
+              label: 'detail_without_notes'
+            },
+            {
+              label: 'detail_with_notes',
+              notes: [{ content: 'note_test' }]
+            },
+            {} // Empty object
+          ]
+        },
+        {
+          enable: false,
+          details: [
+            {
+              label: 'detail_with_notes',
+              notes: [{ content: 'note_test' }]
+            },
+            {
+              label: 'detail_without_notes'
+            }
+          ]
+        }
         ]
       }
     };
@@ -39,36 +57,13 @@ describe('normalizer.js', () => {
             type: 'integer',
             default: '0660328406'
           },
-          orders: {
-            type: 'array',
-            default: [{
-              enable: true
-            }],
-            items: {
-              labels: {
-                type: 'array',
-                default: [],
-              },
-              enable: {
-                type: 'boolean'
-              }
-            }
-          },
           addresses: {
             type: 'array',
             items: {
               details: {
                 type: 'array',
                 default: [],
-                items: {
-                  label: {
-                    type: 'string',
-                  },
-                  notes: {
-                    type: 'array',
-                    default: []
-                  }
-                }
+                items: { $ref: '#/definitions/addressType' }
               },
               enable: {
                 type: 'boolean'
@@ -80,6 +75,20 @@ describe('normalizer.js', () => {
             default: true
           },
         }
+      },
+      definitions: {
+        addressType: {
+          label: {
+            type: 'string',
+          },
+          notes: {
+            type: 'array',
+            default: [], // Field that should be filled for our test case <!>
+            items: {
+              content: { type: 'string' }
+            }
+          }
+        }
       }
     };
 
@@ -87,14 +96,21 @@ describe('normalizer.js', () => {
     const result = await JsonNodeNormalizer.normalize(jsonToNormalize, jsonSchema);
 
     // Then
-    expect(Array.isArray(result.fields.orders))
-      .toBe(true);
-    expect(Array.isArray(result.fields.orders[0].labels))
-      .toBe(true);
     expect(Array.isArray(result.fields.addresses[0].details))
       .toBe(true);
+
     expect(Array.isArray(result.fields.addresses[0].details[0].notes))
       .toBe(true);
+    expect(Array.isArray(result.fields.addresses[0].details[1].notes))
+      .toBe(true);
+    expect(Array.isArray(result.fields.addresses[0].details[2].notes))
+      .toBe(true);
+    expect(result.fields.addresses[0].details[0].notes).toStrictEqual([]);
+    expect(result.fields.addresses[0].details[1].notes).toStrictEqual([{ content: 'note_test' }]);
+    expect(result.fields.addresses[0].details[2].notes).toStrictEqual([]);
+    expect(result.fields.addresses[1].details[0].notes).toStrictEqual([{ content: 'note_test' }]);
+    expect(result.fields.addresses[1].details[1].notes).toStrictEqual([]);
+
     expect(Number.isInteger(result.fields.age))
       .toBe(true);
     expect(result.fields.age)
