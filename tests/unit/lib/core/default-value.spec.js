@@ -36,6 +36,13 @@ describe('normalizer.js', () => {
         ]
       }
     };
+    const emptyJsonToNormalize = {
+      fields: {
+        id: 123,
+        name: 'my_name',
+        firstName: 'firstName'
+      }
+    };
     const jsonSchema = {
       fields: {
         type: 'object',
@@ -93,35 +100,30 @@ describe('normalizer.js', () => {
     };
 
     // When
-    const result = await JsonNodeNormalizer.normalize(jsonToNormalize, jsonSchema);
+    const jsonNormalized = await JsonNodeNormalizer.normalize(jsonToNormalize, jsonSchema);
+    const emptyJsonNormalized = await JsonNodeNormalizer.normalize(
+      emptyJsonToNormalize, jsonSchema
+    );
 
-    // Then
-    expect(Array.isArray(result.fields.addresses[0].details))
-      .toBe(true);
+    // Then (jsonNormalized check)
+    expect(Array.isArray(jsonNormalized.fields.addresses[0].details)).toBe(true);
+    expect(Array.isArray(jsonNormalized.fields.addresses[0].details[0].notes)).toBe(true);
+    expect(Array.isArray(jsonNormalized.fields.addresses[0].details[1].notes)).toBe(true);
+    expect(Array.isArray(jsonNormalized.fields.addresses[0].details[2].notes)).toBe(true);
+    expect(jsonNormalized.fields.addresses[0].details[0].notes).toStrictEqual([]);
+    expect(jsonNormalized.fields.addresses[0].details[1].notes).toStrictEqual([{ content: 'note_test' }]);
+    expect(jsonNormalized.fields.addresses[0].details[2].notes).toStrictEqual([]);
+    expect(jsonNormalized.fields.addresses[1].details[0].notes).toStrictEqual([{ content: 'note_test' }]);
+    expect(jsonNormalized.fields.addresses[1].details[1].notes).toStrictEqual([]);
 
-    expect(Array.isArray(result.fields.addresses[0].details[0].notes))
-      .toBe(true);
-    expect(Array.isArray(result.fields.addresses[0].details[1].notes))
-      .toBe(true);
-    expect(Array.isArray(result.fields.addresses[0].details[2].notes))
-      .toBe(true);
-    expect(result.fields.addresses[0].details[0].notes).toStrictEqual([]);
-    expect(result.fields.addresses[0].details[1].notes).toStrictEqual([{ content: 'note_test' }]);
-    expect(result.fields.addresses[0].details[2].notes).toStrictEqual([]);
-    expect(result.fields.addresses[1].details[0].notes).toStrictEqual([{ content: 'note_test' }]);
-    expect(result.fields.addresses[1].details[1].notes).toStrictEqual([]);
+    expect(Number.isInteger(jsonNormalized.fields.age)).toBe(true);
+    expect(jsonNormalized.fields.age).toEqual(21);
+    expect(Number.isInteger(jsonNormalized.fields.phone)).toBe(true);
+    expect(jsonNormalized.fields.phone).toEqual(660328406);
+    expect(typeof jsonNormalized.fields.id === 'string').toBe(true);
+    expect(typeof jsonNormalized.fields.active === 'boolean').toBe(true);
 
-    expect(Number.isInteger(result.fields.age))
-      .toBe(true);
-    expect(result.fields.age)
-      .toEqual(21);
-    expect(Number.isInteger(result.fields.phone))
-      .toBe(true);
-    expect(result.fields.phone)
-      .toEqual(660328406);
-    expect(typeof result.fields.id === 'string')
-      .toBe(true);
-    expect(typeof result.fields.active === 'boolean')
-      .toBe(true);
+    // Then (emptyJsonNormalized check)
+    expect(emptyJsonNormalized.fields.addresses).toBeUndefined();
   });
 });
