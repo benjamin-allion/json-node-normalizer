@@ -8,9 +8,14 @@ describe('normalizer.js', () => {
         id: 123,
         name: 'my_name',
         firstName: 'firstName',
-        age: '31',
-        phone: '33600000010',
-        active: 'true',
+        addresses: [
+          {
+            enable: true,
+            details: [
+              { label: 'test' }
+            ]
+          }
+        ]
       }
     };
     const jsonSchema = {
@@ -27,22 +32,52 @@ describe('normalizer.js', () => {
             type: 'string'
           },
           age: {
-            type: 'number'
+            type: 'number',
+            default: '21'
           },
           phone: {
-            type: 'integer'
+            type: 'integer',
+            default: '0660328406'
           },
           orders: {
             type: 'array',
-            default: [],
+            default: [{
+              enable: true
+            }],
             items: {
-              label: {
-                type: 'string'
+              labels: {
+                type: 'array',
+                default: [],
+              },
+              enable: {
+                type: 'boolean'
+              }
+            }
+          },
+          addresses: {
+            type: 'array',
+            items: {
+              details: {
+                type: 'array',
+                default: [],
+                items: {
+                  label: {
+                    type: 'string',
+                  },
+                  notes: {
+                    type: 'array',
+                    default: []
+                  }
+                }
+              },
+              enable: {
+                type: 'boolean'
               }
             }
           },
           active: {
-            type: 'boolean'
+            type: 'boolean',
+            default: true
           },
         }
       }
@@ -54,10 +89,20 @@ describe('normalizer.js', () => {
     // Then
     expect(Array.isArray(result.fields.orders))
       .toBe(true);
+    expect(Array.isArray(result.fields.orders[0].labels))
+      .toBe(true);
+    expect(Array.isArray(result.fields.addresses[0].details))
+      .toBe(true);
+    expect(Array.isArray(result.fields.addresses[0].details[0].notes))
+      .toBe(true);
     expect(Number.isInteger(result.fields.age))
       .toBe(true);
+    expect(result.fields.age)
+      .toEqual(21);
     expect(Number.isInteger(result.fields.phone))
       .toBe(true);
+    expect(result.fields.phone)
+      .toEqual(660328406);
     expect(typeof result.fields.id === 'string')
       .toBe(true);
     expect(typeof result.fields.active === 'boolean')
