@@ -4,8 +4,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [1.0.8] - In progress...
+## [1.0.9]
+- In progress
 
+## [1.0.8] - 2021-11-16
+- Fix default value set for boolean field with false. [#52](https://github.com/benjamin-allion/json-node-normalizer/issues/52)
+- Fix dependencies security vulnerability.
+ 
 ## [1.0.7] - 2021-04-12
 - Add 'default' value support. [#38](https://github.com/benjamin-allion/json-node-normalizer/issues/38)
 - Full 'normalizer.js' refactoring [#41](https://github.com/benjamin-allion/json-node-normalizer/issues/41)
