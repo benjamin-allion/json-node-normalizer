@@ -1,7 +1,7 @@
 const JsonNodeNormalizer = require('../../../../index');
 
 describe('normalizer.js', () => {
-  it('Should normalize and add default values', async () => {
+  it('Should normalize and add default values if field is undefined', async () => {
     // Given
     const jsonToNormalize = {
       fields: {
@@ -33,7 +33,8 @@ describe('normalizer.js', () => {
             }
           ]
         }
-        ]
+        ],
+        active: false
       }
     };
     const emptyJsonToNormalize = {
@@ -73,7 +74,7 @@ describe('normalizer.js', () => {
                 items: { $ref: '#/definitions/addressType' }
               },
               enable: {
-                type: 'boolean'
+                type: 'boolean',
               }
             }
           },
@@ -122,6 +123,8 @@ describe('normalizer.js', () => {
     expect(jsonNormalized.fields.phone).toEqual(660328406);
     expect(typeof jsonNormalized.fields.id === 'string').toBe(true);
     expect(typeof jsonNormalized.fields.active === 'boolean').toBe(true);
+    // Then (should keep field value and not set default)
+    expect(jsonNormalized.fields.active).toBe(false);
 
     // Then (emptyJsonNormalized check)
     expect(emptyJsonNormalized.fields.addresses).toBeUndefined();
