@@ -4,8 +4,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.0.10]
+- New cache option to increase performance. [#58](https://github.com/benjamin-allion/json-node-normalizer/issues/58)
+- New 'clearCache' method
+
+See README.MD documentation for more information about cache function.
+
 ## [1.0.9]
-- In progress
+- Dependencies update
 
 ## [1.0.8] - 2021-11-16
 - Fix default value set for boolean field with false. [#52](https://github.com/benjamin-allion/json-node-normalizer/issues/52)
