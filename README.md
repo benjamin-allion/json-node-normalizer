@@ -338,6 +338,9 @@ result = {
 }
 ```
 
+Note :
+
+You can use ```JsonNodeNormalizer.clearCache()``` to manually reset the library cache. 
 
 ## License
 
