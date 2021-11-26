@@ -1,6 +1,6 @@
 {
   "name": "json-node-normalizer",
-  "version": "1.0.10",
+  "version": "1.0.11",
   "description": "NodeJS module that normalize json data types from json schema specifications.",
   "contributors": [
     {
