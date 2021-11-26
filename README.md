@@ -295,7 +295,7 @@ Configuration variables :
 ```javascript
 {
   useCache: true,
-  cacheId: "schemaName", // Schema identifier field path that should contain unique value. Used to put/get schema from cache.
+  cacheId: "schemaId", // Schema identifier used to put/get schema from cache.
   cacheDuration: 60000 // Cache duration in milliseconds
 }
 ```
@@ -322,7 +322,7 @@ Code sample :
     const config = {
       fieldNames: {
         useCache: true,
-        cacheId: "schemaName",
+        cacheId: "mySampleSchema",
         cacheDuration: 60000 // 60 seconds
       }
     };

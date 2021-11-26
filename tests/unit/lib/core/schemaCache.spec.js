@@ -52,7 +52,6 @@ describe('schemaCache.js', () => {
       }
     };
     const jsonSchema = {
-      schemaName: "1233487",
       data: {
         type: 'object',
         properties: {
@@ -72,7 +71,7 @@ describe('schemaCache.js', () => {
     };
     const customConfig = {
       useCache: true,
-      cacheId: "schemaName",
+      cacheId: "mySampleSchema",
       cacheDuration: 800
     };
 
@@ -112,7 +111,6 @@ describe('schemaCache.js', () => {
       }
     };
     const jsonSchema = {
-      schemaName: "1233489",
       data: {
         type: 'object',
         properties: {
@@ -132,7 +130,7 @@ describe('schemaCache.js', () => {
     };
     const customConfig = {
       useCache: true,
-      cacheId: "schemaName",
+      cacheId: "mySampleSchema",
       cacheDuration: 200
     };
 
