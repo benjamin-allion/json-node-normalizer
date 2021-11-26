@@ -102,9 +102,7 @@ describe('normalizer.js', () => {
 
     // When
     const jsonNormalized = await JsonNodeNormalizer.normalize(jsonToNormalize, jsonSchema);
-    const emptyJsonNormalized = await JsonNodeNormalizer.normalize(
-      emptyJsonToNormalize, jsonSchema
-    );
+    const emptyJsonNormalized = await JsonNodeNormalizer.normalize(emptyJsonToNormalize, jsonSchema);
 
     // Then (jsonNormalized check)
     expect(Array.isArray(jsonNormalized.fields.addresses[0].details)).toBe(true);
