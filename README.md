@@ -227,6 +227,9 @@ See https://github.com/json-path/JsonPath for more information about JsonPath ex
 
 ## Logging Level
 
+Logging is disabled by default (since 1.0.10).
+To enable logging, you must define the `JSON_NODE_NORMALIZER_DEBUG` environment to `true`.
+
 Log events can have different severity levels - in some cases, you just want to log events with at least a warning level, sometimes log lines have to be more verbose.
 
 Each level is given a specific integer priority. The higher the priority the more important the message is considered to be.
@@ -283,6 +286,58 @@ result = {
    }
 }
 ```
+
+#### Cache to increase performance
+
+If your schema doesn't change between calls, you can enable cache to reduce process time.
+
+Configuration variables :
+```javascript
+{
+  useCache: true,
+  cacheId: "schemaName", // Schema identifier field path that should contain unique value. Used to put/get schema from cache.
+  cacheDuration: 60000 // Cache duration in milliseconds
+}
+```
+
+Code sample :
+```javascript
+    // Given
+    const dataToNormalize = { 
+      data: { 
+        enable: 'true' // MUST BE CONVERTED TO BOOLEAN
+      } 
+    };
+    const jsonSchema = {
+      schemaName: "mySchema",      
+      data: {
+        type: 'object',
+        properties: {
+          enable: {
+            normalization_type: 'boolean'  // 'type' by default but in that case we want to use 'normalization_type'
+          }
+        }
+      }
+    };
+    const config = {
+      fieldNames: {
+        useCache: true,
+        cacheId: "schemaName",
+        cacheDuration: 60000 // 60 seconds
+      }
+    };
+    const result = await JsonNodeNormalizer.normalize(dataToNormalize, jsonSchema, config);
+```
+
+Result :
+```javascript
+result = {
+   "data":{
+      "enable": true
+   }
+}
+```
+
 
 ## License
 
