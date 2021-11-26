@@ -20,6 +20,7 @@ module.exports = {
         "no-use-before-define": 'off',
         "class-methods-use-this": 'off',
         "linebreak-style": 0,
-        "arrow-parens": 'off'
+        "arrow-parens": 'off',
+        "max-len": ["error", { "code": 140 }]
     }
 };
