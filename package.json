@@ -1,6 +1,6 @@
 {
   "name": "json-node-normalizer",
-  "version": "1.0.9",
+  "version": "1.0.10-beta",
   "description": "NodeJS module that normalize json data types from json schema specifications.",
   "contributors": [
     {
@@ -14,7 +14,7 @@
   },
   "main": "index.js",
   "scripts": {
-    "test": "cross-env JSON_NODE_NORMALIZER_LOGGING_LEVEL=debug jest",
+    "test": "cross-env JSON_NODE_NORMALIZER_DEBUG=true JSON_NODE_NORMALIZER_LOGGING_LEVEL=debug jest",
     "lint": "eslint \"./lib/**/*.js\" \"./config/**/*.js\" \"./tests/**/*.js\"",
     "lint:fix": "eslint --fix \"./lib/**/*.js\" \"./config/**/*.js\" \"./tests/**/*.js\"",
     "coverage": "cross-env JSON_NODE_NORMALIZER_LOGGING_LEVEL=debug jest --coverage",
