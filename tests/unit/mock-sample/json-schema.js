@@ -7,16 +7,20 @@ const schemaWithRef = {
     fruits: {
       type: 'array',
       items: {
-        type: 'string'
-      }
+        type: 'string',
+      },
     },
     vegetables: {
       type: 'array',
-      items: { $ref: '#/definitions/veggie' }
+      items: { $ref: '#/definitions/veggie' },
     },
     other: {
-      type: 'object'
-    }
+      type: 'object',
+    },
+    dateOfPurchase: {
+      type: 'string',
+      format: 'date-time',
+    },
   },
   definitions: {
     veggie: {
@@ -25,17 +29,21 @@ const schemaWithRef = {
       properties: {
         veggieName: {
           type: 'string',
-          description: 'The name of the vegetable.'
+          description: 'The name of the vegetable.',
         },
         veggieLike: {
           type: 'boolean',
-          description: 'Do I like this vegetable?'
-        }
-      }
-    }
-  }
+          description: 'Do I like this vegetable?',
+        },
+        veggieColor: {
+          type: 'string',
+          description: 'Color of the vegetable',
+        },
+      },
+    },
+  },
 };
 
 module.exports = {
-  schemaWithRef
+  schemaWithRef,
 };
