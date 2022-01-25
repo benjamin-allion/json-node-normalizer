@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.0.13]
+- Add a new 'exclude' option to ignore some fields/paths.  [#62](https://github.com/benjamin-allion/json-node-normalizer/pull/62)
+- Default value is not set anymore for boolean field with 'false' value.  [#57](https://github.com/benjamin-allion/json-node-normalizer/pull/57)
+
 ## [1.0.12]
 - Fix cache problem (Add cloneDeep to avoid deleted ref problem).  [#61](https://github.com/benjamin-allion/json-node-normalizer/pull/61)
 
