@@ -287,6 +287,72 @@ result = {
 }
 ```
 
+#### Exclude some fields
+
+If you need to exclude some fields to be normalized, you can use the configuration variable `excludePaths`
+
+Code sample :
+
+```javascript
+// Given
+const dataToNormalize = {
+  data: {
+    enable: 'true',
+    count: '72',
+    other: '12',
+    foo: 5414325,
+  },
+};
+const jsonSchema = {
+  data: {
+    type: 'object',
+    properties: {
+      enable: {
+        type: 'boolean',
+      },
+      count: {
+        type: 'number',
+      },
+      other: {
+        type: 'number',
+      },
+      foo: {
+        type: 'string',
+        format: 'date-time',
+      },
+    },
+  },
+};
+const config = {
+  excludePaths: [
+    {
+      path: '$.data.enable', // Exclude by field path
+    },
+    {
+      type: 'number', // Exclude by type
+    },
+    {
+      type: 'string', // Exclude by both type and format
+      format: 'date-time',
+    },
+  ],
+};
+const result = await JsonNodeNormalizer.normalize(dataToNormalize, jsonSchema, config);
+```
+
+Result :
+
+```javascript
+result = {
+  data: {
+    enable: 'true',
+    count: '72',
+    other: '12',
+    foo: 5414325,
+  },
+};
+```
+
 #### Cache to increase performance
 
 If your schema doesn't change between calls, you can enable cache to reduce process time.

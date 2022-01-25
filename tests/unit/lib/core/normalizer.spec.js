@@ -9,7 +9,11 @@ describe('normalizer.js', () => {
     let jsonToConvert = { ...jsonSample };
     const targetType = 'UNKNOW_TYPE';
     // When
-    jsonToConvert = JsonNodeNormalizer.normalizePaths({ jsonNode: jsonToConvert, paths: ['root.subField'], type: targetType });
+    jsonToConvert = JsonNodeNormalizer.normalizePaths({
+      jsonNode: jsonToConvert,
+      paths: ['root.subField'],
+      type: targetType,
+    });
     // Then
     expect(jsonToConvert).toEqual(jsonSample);
   });
@@ -26,43 +30,43 @@ describe('normalizer.js', () => {
         age: '31',
         phone: '33600000010',
         orders: {
-          label: 'first_order'
+          label: 'first_order',
         },
         active: 'true',
-      }
+      },
     };
     const jsonSchema = {
       fields: {
         type: 'object',
         properties: {
           id: {
-            type: 'string'
+            type: 'string',
           },
           name: {
-            type: 'string'
+            type: 'string',
           },
           firstName: {
-            type: 'string'
+            type: 'string',
           },
           age: {
-            type: 'number'
+            type: 'number',
           },
           phone: {
-            type: 'integer'
+            type: 'integer',
           },
           orders: {
             type: 'array',
             items: {
               label: {
-                type: 'string'
-              }
-            }
+                type: 'string',
+              },
+            },
           },
           active: {
-            type: 'boolean'
+            type: 'boolean',
           },
-        }
-      }
+        },
+      },
     };
     // When
     const result = await JsonNodeNormalizer.normalize(jsonToNormalize, jsonSchema);
@@ -84,49 +88,49 @@ describe('normalizer.js', () => {
         age: 31,
         phone: 33600000010,
         orders: {
-          label: 'first_order'
+          label: 'first_order',
         },
         active: true,
         externalField: {
-          label: 'missing_param'
-        }
-      }
+          label: 'missing_param',
+        },
+      },
     };
     const jsonSchema = {
       fields: {
         type: 'object',
         properties: {
           id: {
-            type: 'string'
+            type: 'string',
           },
           name: {
-            type: 'string'
+            type: 'string',
           },
           firstName: {
-            type: 'string'
+            type: 'string',
           },
           age: {
-            type: 'number'
+            type: 'number',
           },
           phone: {
-            type: 'integer'
+            type: 'integer',
           },
           orders: {
             type: 'array',
             items: {
               label: {
-                type: 'string'
-              }
-            }
+                type: 'string',
+              },
+            },
           },
           active: {
-            type: 'boolean'
+            type: 'boolean',
           },
           externalField: {
-            type: 'null'
+            type: 'null',
           },
-        }
-      }
+        },
+      },
     };
     // When
     const result = await JsonNodeNormalizer.normalize(jsonToNormalize, jsonSchema);
@@ -147,13 +151,13 @@ describe('normalizer.js', () => {
         type: 'object',
         properties: {
           enable: {
-            normalization_type: 'boolean'
-          }
-        }
-      }
+            normalization_type: 'boolean',
+          },
+        },
+      },
     };
     const config = {
-      typeFieldName: 'normalization_type'
+      typeFieldName: 'normalization_type',
     };
     // When
     const result = await JsonNodeNormalizer.normalize(jsonData, jsonSchema, config);
@@ -167,7 +171,7 @@ describe('normalizer.js', () => {
       data: {
         lastName: 'must_be_uppercase',
         firstName: 'MUST_BE_LOWERCASE',
-      }
+      },
     };
     const jsonSchema = {
       data: {
@@ -175,17 +179,17 @@ describe('normalizer.js', () => {
         properties: {
           lastName: {
             type: 'string',
-            normalization_format: FormatTypes.UPPERCASE
+            normalization_format: FormatTypes.UPPERCASE,
           },
           firstName: {
             type: 'string',
-            normalization_format: FormatTypes.LOWERCASE
+            normalization_format: FormatTypes.LOWERCASE,
           },
-        }
-      }
+        },
+      },
     };
     const config = {
-      formatFieldName: 'normalization_format'
+      formatFieldName: 'normalization_format',
     };
     // When
     const result = await JsonNodeNormalizer.normalize(jsonData, jsonSchema, config);
@@ -194,7 +198,7 @@ describe('normalizer.js', () => {
       data: {
         lastName: 'MUST_BE_UPPERCASE',
         firstName: 'must_be_lowercase',
-      }
+      },
     };
     expect(result).toStrictEqual(expectedResult);
   });
@@ -206,25 +210,25 @@ describe('normalizer.js', () => {
         enable: 'true',
         lastName: 'must_be_uppercase',
         firstName: 'MUST_BE_LOWERCASE',
-      }
+      },
     };
     const jsonSchema = {
       data: {
         type: 'object',
         properties: {
           enable: {
-            type: 'boolean'
+            type: 'boolean',
           },
           lastName: {
             type: 'string',
-            format: FormatTypes.UPPERCASE
+            format: FormatTypes.UPPERCASE,
           },
           firstName: {
             type: 'string',
-            format: FormatTypes.LOWERCASE
+            format: FormatTypes.LOWERCASE,
           },
-        }
-      }
+        },
+      },
     };
     // When
     const result = await JsonNodeNormalizer.normalize(jsonData, jsonSchema);
@@ -234,7 +238,7 @@ describe('normalizer.js', () => {
         enable: true,
         lastName: 'MUST_BE_UPPERCASE',
         firstName: 'must_be_lowercase',
-      }
+      },
     };
     expect(result).toStrictEqual(expectedResult);
   });
@@ -246,25 +250,25 @@ describe('normalizer.js', () => {
         enable: 'true',
         firstName: 'MUST_BE_LOWERCASE',
         lastName: 'must_be_uppercase',
-      }
+      },
     };
     // When
     let result = await JsonNodeNormalizer.normalizePaths({
       jsonNode: jsonData,
       paths: ['.enable'],
-      type: NodeTypes.BOOLEAN_TYPE
+      type: NodeTypes.BOOLEAN_TYPE,
     });
     result = await JsonNodeNormalizer.normalizePaths({
       jsonNode: result,
       paths: ['.lastName'],
       type: NodeTypes.STRING_TYPE,
-      format: FormatTypes.UPPERCASE
+      format: FormatTypes.UPPERCASE,
     });
     result = await JsonNodeNormalizer.normalizePaths({
       jsonNode: result,
       paths: ['.firstName'],
       type: NodeTypes.STRING_TYPE,
-      format: FormatTypes.LOWERCASE
+      format: FormatTypes.LOWERCASE,
     });
     // Then
     const expectedResult = {
@@ -272,8 +276,74 @@ describe('normalizer.js', () => {
         enable: true,
         lastName: 'MUST_BE_UPPERCASE',
         firstName: 'must_be_lowercase',
-      }
+      },
     };
     expect(result).toStrictEqual(expectedResult);
+  });
+
+  it('should not normalize paths matching an exclude path', async () => {
+    // Given
+    const jsonToNormalize = {
+      fields: {
+        id: 123,
+        name: 'my_name',
+        firstName: 'firstName',
+        age: '31',
+        phone: '33600000010',
+        orders: {
+          label: 'first_order',
+        },
+        active: 'true',
+        updatedAt: 311588172,
+      },
+    };
+    const jsonSchema = {
+      fields: {
+        type: 'object',
+        properties: {
+          id: {
+            type: 'string',
+          },
+          name: {
+            type: 'string',
+          },
+          firstName: {
+            type: 'string',
+          },
+          age: {
+            type: 'number',
+          },
+          phone: {
+            type: 'integer',
+          },
+          orders: {
+            type: 'array',
+            items: {
+              label: {
+                type: 'string',
+              },
+            },
+          },
+          active: {
+            type: 'boolean',
+          },
+          updatedAt: {
+            type: 'string',
+            format: 'date-time',
+          },
+        },
+      },
+    };
+    // When
+    const result = await JsonNodeNormalizer.normalize(jsonToNormalize, jsonSchema, {
+      excludePaths: [{ type: 'string', format: 'date-time' }, { path: '$.fields.age' }],
+    });
+
+    // Then
+    expect(typeof result.fields.updatedAt).toBe(typeof jsonToNormalize.fields.updatedAt);
+    expect(result.fields.updatedAt).toBe(jsonToNormalize.fields.updatedAt);
+
+    expect(typeof result.fields.age).toBe(typeof jsonToNormalize.fields.age);
+    expect(result.fields.age).toBe(jsonToNormalize.fields.age);
   });
 });

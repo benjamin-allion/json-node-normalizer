@@ -7,8 +7,9 @@ const defaultConfig = {
   formatFieldName: 'format',
   defaultFieldName: 'default',
   useCache: false,
-  cacheId: "$id",
-  cacheDuration: 100
+  cacheId: '$id',
+  cacheDuration: 100,
+  excludePaths: [],
 };
 
 module.exports = {
